@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <h1><strong>{{updated_object.objekts}} {{updated_object.objekta_nosaukums}}</strong></h1>
+        <h2>Labot objekta datus</h2>
+        <br/>
+    </center>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        <!-- {{form.as_p}} -->
+        <table class="table table table-striped table-bordered table-sm"">
+            <tbody>
+                    <tr>
+                        <th scope="row">Reģions</th>
+                        <td>{{  form.reģions }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nodaļa</th>
+                        <td>{{  form.nodaļa }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Iezīme</th>
+                        <td>{{  form.iezīme }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Objekts</th>
+                        <td>{{  form.objekts }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nosaukums</th>
+                        <td>{{  form.objekta_nosaukums }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Adrese</th>
+                        <td>{{  form.adrese }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Atbidības teritorija</th>
+                        <td>{{  form.atbidības_teritorija }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tehniskais ID nr.</th>
+                        <td>{{  form.tehn_id  }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">GPS N</th>
+                        <td>{{  form.gps_n }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">GPS E</th>
+                        <td>{{  form.gps_e }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ĢIS X</th>
+                        <td>{{  form.ģis_x }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">ĢIS Y</th>
+                        <td>{{  form.ģis_y }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Pieslēguma veids</th>
+                        <td>{{  form.pieslēguma_veids }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Strādā ar 2 datu centriem</th>
+                        <td>{{  form.darbs_ar_2_centriem }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Garantētā barošana </th>
+                        <td>{{  form.garantētā_barošana  }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RTU ražotājs</th>
+                        <td>{{  form.rtu_ražotājs }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RTU 2. ražotājs</th>
+                        <td>{{  form.rtu_2_ražotājs }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Objekta statuss</th>
+                        <td>{{  form.status }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">RTU IP adrese</th>
+                        <td>{{  form.rtu_ip_adrese  }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">NFE tabula</th>
+                        <td>{{  form.nfe_tabula }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Protokols ar SCADA</th>
+                        <td>{{  form.protokols_ar_scada }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Protokols ar AST</th>
+                        <td>{{  form.protokols_ar_ast }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Saite ar slēgiekārtu nr.1</th>
+                        <td>{{  form.dpp_1_saite_ar_slēgiekārtu }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Saite ar slēgiekārtu nr.2</th>
+                        <td>{{  form.dpp_2_saite_ar_slēgiekārtu }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">J.sl. skaits</th>
+                        <td>{{  form.js }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">IO skaits</th>
+                        <td>{{  form.io }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">TS skaits</th>
+                        <td>{{  form.ts }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">TV skaits</th>
+                        <td>{{  form.tv }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">TM skaits</th>
+                        <td>{{  form.tm }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Rekonstrukcijas gads</th>
+                        <td>{{  form.rekonstrukcijas_gads }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Vecākās komponentes gads</th>
+                        <td>{{  form.vec_komp_gads }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Piezīmes</th>
+                        <td>{{  form.piezīme }}</td>
+                    </tr>
+            </tbody>
+            
+        </table>
+
+        <input type="submit" value="Labot" class="btn btn-success btn-lg"><br/><br/>
+    </form>
+    
+
+{% endblock %}

@@ -1,0 +1,57 @@
+
+.background {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(89deg, #9FA4C4 0%, #B3CDD1 100%); 
+}
+.dvs_main{
+    background-color: lightslategray;
+}
+
+.font{
+    font-family: "Courier New", Courier, monospace;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.centerText{
+    text-align: center;
+}
+
+.DVShead{
+    padding-top: 3rem;
+    font: 600 2.5em 'Raleway', sans-serif;
+    color: rgba(0, 0, 0, .7);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    width: 100%;
+}
+
+.tests12{
+    color: darkmagenta;
+}
+
+
+#particles-js {
+    /* background: lightseagreen; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+body{
+    /* background-image: url("background.jpg"); */
+    background: linear-gradient(89deg, #fdfbfb 0%, #ebedee 100%);
+}
+
+footer{
+    /* background-image: url("background.jpg"); */
+    background: linear-gradient(89deg, #fdfbfb 0%, #ebedee 100%);
+}

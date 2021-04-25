@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if meklesana %}
+
+        <center>
+            <h1>Jūs meklējāt  "{{ meklesana }}"</h1>
+        </center>
+        <br/><br/>
+        <table class="table table table-striped table-bordered table-hover table-sm"">
+            <thead>
+            <tr>
+                <th scope="col">Reģions</th>
+                <th scope="col">Nodaļa</th>
+                <th scope="col">Objekta OA</th>
+                <th scope="col">Objekta Nosaukums</th>
+                <th scope="col">Darbības</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in mekletais_objekts %}
+                    <tr>
+                        <td>{{item.reģions }}</td>
+                        <td>{{ item.nodaļa }}</td>
+                        <td><a href="{% url 'single_object' item.id_dvs %}">{{ item.objekts }}</a></td>
+                        <td>{{ item.objekta_nosaukums }}</td>
+                        <td align="center">
+                            <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a>
+                            <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a></td>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <center>
+            <h1>Jūs aizmirsāt ierakstīt mekējamo objektu</h1>
+        </center>
+    {% endif %}
+
+
+{% endblock %}
