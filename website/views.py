@@ -6,7 +6,7 @@ from .models import DvsInfoDbRtuIekrtaCsv
 from .models import RTUrazotajs
 from .models import ObjektuSadalijums
 from .models import RTUvecums
-from .forms import ObjectForm
+from .forms import ObjectForm, AkumForm, RtuForm, RaaForm
 from django.contrib import messages
 from django.views import generic
 
@@ -87,9 +87,38 @@ def update_object(request, object_id):
     form = ObjectForm(request.POST or None, instance = updated_object)
     if form.is_valid():
             form.save()
-            messages.success(request, ('Labojumi ir veikti'))
+            messages.success(request, ('Labojumi objekta datos ir veikti'))
             return redirect('home')
     return render(request, 'update_object.html', {'updated_object': updated_object, 'form': form})
+
+def update_akum(request, object_id):
+    updated_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
+    form = AkumForm(request.POST or None, instance = updated_akum)
+    if form.is_valid():
+            form.save()
+            messages.success(request, ('Labojumi akumulatora datos ir veikti'))
+            return redirect('home')
+    return render(request, 'update_akum.html', {'updated_akum': updated_akum, 'form': form})
+
+def update_rtu(request, object_id):
+    updated_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
+    form = RtuForm(request.POST or None, instance = updated_rtu)
+    if form.is_valid():
+            form.save()
+            messages.success(request, ('Labojumi RTU iekārtas datos ir veikti'))
+            return redirect('home')
+    return render(request, 'update_rtu.html', {'updated_rtu': updated_rtu, 'form': form})
+
+def update_raa(request, object_id):
+    updated_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
+    form = RaaForm(request.POST or None, instance = updated_raa)
+    if form.is_valid():
+            form.save()
+            messages.success(request, ('Labojumi RAA iekārtas datos ir veikti'))
+            return redirect('home')
+    return render(request, 'update_raa.html', {'updated_raa': updated_raa, 'form': form})
+
+
 
 # class ModelDeleteView(DeleteView):
 #     model = ObjectForm(request.POST or None, instance = delete_object)
@@ -101,10 +130,39 @@ def delete_object(request, object_id):
     if form.is_valid():
             form.save()
             deleted_object.delete()
-            messages.success(request, ('Objekts ir izdzēsts'))
+            messages.success(request, ('Objekta dati ir izdzēsti'))
             return redirect('home')
     return render(request, 'delete_object.html', {'deleted_object': deleted_object, 'form': form})
 
+def delete_akum(request, object_id):
+    deleted_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
+    form = AkumForm(request.POST or None, instance = deleted_akum)
+    if form.is_valid():
+            form.save()
+            deleted_akum.delete()
+            messages.success(request, ('Akumulatora dati ir izdzēsti'))
+            return redirect('home')
+    return render(request, 'delete_akum.html', {'deleted_akum': deleted_akum, 'form': form})
+
+def delete_rtu(request, object_id):
+    deleted_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
+    form = RtuForm(request.POST or None, instance = deleted_rtu)
+    if form.is_valid():
+            form.save()
+            deleted_rtu.delete()
+            messages.success(request, ('RTU iekārtas dati ir izdzēsti'))
+            return redirect('home')
+    return render(request, 'delete_rtu.html', {'deleted_rtu': deleted_rtu, 'form': form})
+
+def delete_raa(request, object_id):
+    deleted_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
+    form = RaaForm(request.POST or None, instance = deleted_raa)
+    if form.is_valid():
+            form.save()
+            deleted_raa.delete()
+            messages.success(request, ('RAA iekārtas dati ir izdzēsti'))
+            return redirect('home')
+    return render(request, 'delete_raa.html', {'deleted_raa': deleted_raa, 'form': form})
 
     
 def add(request):
@@ -153,6 +211,36 @@ def add(request):
         return redirect('home')
     else:
         return render(request, 'add.html', {})
+    
+def add_akb(request, object_id):
+    akb_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
+    if request.method == 'POST':
+        form = AkumForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        else:
+            reģions = request.POST['reģions']
+            nodaļa = request.POST['nodaļa']
+            iezīme = request.POST['iezīme']
+            objekts = request.POST['objekts']
+            akb_ražotājs_un_nomināli = request.POST['akb_ražotājs_un_nomināli']
+            akb_skaits = request.POST['akb_skaits']
+            akb_izmērītais_ah = request.POST['akb_izmērītais_ah']
+            akb_iekšējā_pretestība_mom = request.POST['akb_iekšējā_pretestība_mom']
+            uzstādīšanas_vieta = request.POST['uzstādīšanas_vieta']
+            uzstādīšanas_gads = request.POST['uzstādīšanas_gads']
+            akb_izgatavošanas_partija_vai_datums = request.POST['akb_izgatavošanas_partija_vai_datums']
+            pārbaudes_datums = request.POST['pārbaudes_datums']
+            nākošā_pārbaude = request.POST['nākošā_pārbaude']     
+            piezīme = request.POST['piezīme']
+            
+            messages.success(request, ('Kļūda pievienojot objektu'))
+            #return redirect('add')
+            return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'akb_ražotājs_un_nomināli':akb_ražotājs_un_nomināli , 'akb_skaits':akb_skaits , 'akb_izmērītais_ah':akb_izmērītais_ah , 'akb_iekšējā_pretestība_mom':akb_iekšējā_pretestība_mom , 'uzstādīšanas_vieta':uzstādīšanas_vieta , 'uzstādīšanas_gads':uzstādīšanas_gads , 'akb_izgatavošanas_partija_vai_datums':akb_izgatavošanas_partija_vai_datums , 'pārbaudes_datums':pārbaudes_datums , 'nākošā_pārbaude':nākošā_pārbaude , 'piezīme':piezīme, 'akb_object_data':akb_object_data })
+        messages.success(request, ('Objekts ir pievienots datubāzei'))
+        return redirect('home')
+    else:
+        return render(request, 'add_akb.html', { 'akb_object_data':akb_object_data })
 
 
 

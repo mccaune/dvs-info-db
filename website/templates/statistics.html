@@ -3,40 +3,45 @@
 
 {% block content %}
 
-    <br/>
-    <center>
-        <h3>Objektu sadalījums pa reģioniem</h3>
-    </center>
-    <br/>
-    <div class="card mb-4">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3>Objektu sadalījums pa reģioniem</h3>
+        </div>
         <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
-                        <table class="table table table-striped table-bordered table-sm"">
-                            <tbody>
-                                {% for item in objektu_sadalijums_stat %}
-                                    <tr>
-                                        <th scope="row">{{ item.reģions }}</th>
-                                        <td>{{ item.objektu_skaits }}</td>
-                                    </tr>
-                                {% endfor %}
-                                <tr class="table-info">
-                                    <th scope="row">Kopā</th>
-                                    <td>{{ kopejais_skaits }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-8">
-                        <div style="width: 100%;">
-                            <canvas id="objektu_sadalijums_bar_chart"></canvas>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <table class="table table table-striped table-bordered table-sm"">
+                                    <tbody>
+                                        {% for item in objektu_sadalijums_stat %}
+                                            <tr>
+                                                <th scope="row">{{ item.reģions }}</th>
+                                                <td>{{ item.objektu_skaits }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        <tr class="table-info">
+                                            <th scope="row">Kopā</th>
+                                            <td>{{ kopejais_skaits }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-8">
+                                <div style="width: 100%;">
+                                    <canvas id="objektu_sadalijums_bar_chart"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    
     <br/>
 
     <center>

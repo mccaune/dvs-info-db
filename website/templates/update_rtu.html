@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <h1><strong>{{updated_rtu.objekts}} </strong></h1>
+        <h2>Labot RTU iekārtas datus</h2>
+        <br/>
+    </center>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        <!-- {{form.as_p}} -->
+        <table class="table table table-striped table-bordered table-sm"">
+            <tbody>
+                    <tr>
+                        <th scope="row">Reģions</th>
+                        <td>{{  form.reģions }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nodaļa</th>
+                        <td>{{  form.nodaļa }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Iezīme</th>
+                        <td>{{  form.iezīme }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Objekts</th>
+                        <td>{{  form.objekts }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tips</th>
+                        <td>{{  form.tips }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Ražotājs</th>
+                        <td>{{  form.iekārtas_ražotājs }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Modelis</th>
+                        <td>{{  form.modelis }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Daudzums</th>
+                        <td>{{  form.daudzums }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Uzstadīšanas vieta</th>
+                        <td>{{  form.uzstadīšanas_vieta }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">FW versija</th>
+                        <td>{{  form.programmaturas_versija }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Piezīme</th>
+                        <td>{{  form.piezime }}</td>
+                    </tr>
+            </tbody>
+            
+        </table>
+
+        <input type="submit" value="Labot" class="btn btn-success btn-lg"><br/><br/>
+    </form>
+    
+
+{% endblock %}
