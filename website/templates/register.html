@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>DVS info DB</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+</head>
+
+
+<body class="background font">
+    <div class="centerText">
+        <div id="particles-js"></div>
+        <h1 class="DVShead">Izveidot jaunu lietotāju</h1>
+        <article class="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center card">
+            <main class="pa4 black-80">
+                <div class="measure">
+                  <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                      <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% for error in field.errors %}
+                          <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                      </p>
+                    {% endfor %}
+                    <button type="submit" class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib">Izveidot</button>
+                  </form>
+                </div>
+            </main>
+        </article>
+    <script src="{% static '/particles.js-master/particles.js' %}"></script>
+    <script src="{% static '/particles.js-master/demo/js/app.js' %}"></script>
+    <!-- <script src="./script.js"></script> -->
+    </div>
+</body>
+
+
+</html>

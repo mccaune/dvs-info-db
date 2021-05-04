@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <center>
-        <h1><strong>{{deleted_akum.objekts}} {{deleted_akum.akb_ražotājs_un_nomināli}}</strong></h1>
-        <br/>
-    </center>
-    
-    <form action="" method="POST">
-        {% csrf_token %}
-        <h3>Vai vēlaties dzēst šo akumulatoru?</h3>
-        <input type="submit" value="Dzēst" class="btn btn-danger btn-lg"><br/><br/>
-    </form>
-    
+
+    <br/><br/>
+    <div class="card w-75">
+        <div class="card-body">
+        <h3 class="card-title">{{deleted_akum.objekts}} {{deleted_akum.akb_ražotājs_un_nomināli}}</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h5>Vai vēlaties dzēst šo akumulatoru?</h5>
+            <input type="submit" value="Dzēst" class="btn btn-danger btn-lg"><br/><br/>
+        </form>
+        </div>
+    </div>
 
 {% endblock %}

@@ -1,8 +1,7 @@
 from django import forms
-from .models import DvsInfoDbCsv
-from .models import DvsInfoDbAkbCsv
-from .models import DvsInfoDbRaaIekrtaCsv
-from .models import DvsInfoDbRtuIekrtaCsv
+from .models import DvsInfoDbCsv, DvsInfoDbAkbCsv, DvsInfoDbRaaIekrtaCsv, DvsInfoDbRtuIekrtaCsv
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class ObjectForm(forms.ModelForm):
     class Meta:
@@ -23,3 +22,11 @@ class RaaForm(forms.ModelForm):
     class Meta:
         model = DvsInfoDbRaaIekrtaCsv
         fields = ['reģions','nodaļa','iezīme','objekts', 'raa_ražotājs', 'raa_modelis', 'raa_daudzums', 'raa_protokols', 'raa_interface', 'raa_pieslegums', 'piezime']
+        
+class RegisterForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
+    email = forms.EmailField(max_length=254)
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )

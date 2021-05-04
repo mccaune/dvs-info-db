@@ -214,7 +214,7 @@
         <div class="card-header">
             <div class="row row-cols-lg-auto align-items-center">
                 <h3>RTU informācija</h3>
-                <a href="#" class="btn btn-outline-secondary btn-sm">Pievienot RTU iekārtu</a> 
+                <a href="{% url 'add_rtu' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot RTU iekārtu</a> 
             </div>
         </div>
         <div class="card-body">
@@ -261,7 +261,7 @@
         <div class="card-header">
             <div class="row row-cols-lg-auto align-items-center">
                 <h3>RAA informācija</h3> 
-                <a href="#" class="btn btn-outline-secondary btn-sm ">Pievienot RAA iekārtu</a> 
+                <a href="{% url 'add_raa' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm ">Pievienot RAA iekārtu</a> 
             </div>
         </div>
         <div class="card-body">

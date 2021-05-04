@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import DvsInfoDbCsv
-from .models import DvsInfoDbAkbCsv
-from .models import DvsInfoDbRaaIekrtaCsv
-from .models import DvsInfoDbRtuIekrtaCsv
-from .models import RTUrazotajs
-from .models import ObjektuSadalijums
-from .models import RTUvecums
+from .models import DvsInfoDbCsv, DvsInfoDbAkbCsv, DvsInfoDbRaaIekrtaCsv, DvsInfoDbRtuIekrtaCsv, RTUrazotajs, ObjektuSadalijums, RTUvecums
 from .forms import ObjectForm, AkumForm, RtuForm, RaaForm
 from django.contrib import messages
 from django.views import generic
+from django.contrib.auth.models import Permission, User
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.decorators import login_required, permission_required
+from website import forms
 
 def test(request):
     main_dvs = DvsInfoDbCsv.objects.all
@@ -234,14 +232,80 @@ def add_akb(request, object_id):
             nākošā_pārbaude = request.POST['nākošā_pārbaude']     
             piezīme = request.POST['piezīme']
             
-            messages.success(request, ('Kļūda pievienojot objektu'))
+            messages.success(request, ('Kļūda pievienojot akumulatoru'))
             #return redirect('add')
             return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'akb_ražotājs_un_nomināli':akb_ražotājs_un_nomināli , 'akb_skaits':akb_skaits , 'akb_izmērītais_ah':akb_izmērītais_ah , 'akb_iekšējā_pretestība_mom':akb_iekšējā_pretestība_mom , 'uzstādīšanas_vieta':uzstādīšanas_vieta , 'uzstādīšanas_gads':uzstādīšanas_gads , 'akb_izgatavošanas_partija_vai_datums':akb_izgatavošanas_partija_vai_datums , 'pārbaudes_datums':pārbaudes_datums , 'nākošā_pārbaude':nākošā_pārbaude , 'piezīme':piezīme, 'akb_object_data':akb_object_data })
-        messages.success(request, ('Objekts ir pievienots datubāzei'))
+        messages.success(request, ('Akumulators ir pievienots datubāzei'))
         return redirect('home')
     else:
         return render(request, 'add_akb.html', { 'akb_object_data':akb_object_data })
 
+def add_rtu(request, object_id):
+    rtu_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
+    if request.method == 'POST':
+        form = RtuForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        else:
+            reģions = request.POST['reģions']
+            nodaļa = request.POST['nodaļa']
+            iezīme = request.POST['iezīme']
+            objekts = request.POST['objekts']
+            tips = request.POST['tips']
+            iekārtas_ražotājs = request.POST['iekārtas_ražotājs']
+            modelis = request.POST['modelis']
+            daudzums = request.POST['daudzums']
+            uzstadīšanas_vieta = request.POST['uzstadīšanas_vieta']
+            programmaturas_versija = request.POST['programmaturas_versija']
+            piezīme = request.POST['piezīme']       
+            
+            messages.success(request, ('Kļūda pievienojot RTU iekārtu'))
+            #return redirect('add')
+            return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'tips':tips , 'iekārtas_ražotājs':iekārtas_ražotājs , 'modelis':modelis , 'daudzums':daudzums , 'uzstadīšanas_vieta':uzstadīšanas_vieta , 'programmaturas_versija':programmaturas_versija, 'piezīme':piezīme, 'rtu_object_data':rtu_object_data })
+        messages.success(request, ('RTU iekārta ir pievienota datubāzei'))
+        return redirect('home')
+    else:
+        return render(request, 'add_rtu.html', { 'rtu_object_data':rtu_object_data })
+    
+def add_raa(request, object_id):
+    raa_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
+    if request.method == 'POST':
+        form = RaaForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+        else:
+            reģions = request.POST['reģions']
+            nodaļa = request.POST['nodaļa']
+            iezīme = request.POST['iezīme']
+            objekts = request.POST['objekts']
+            raa_ražotājs = request.POST['raa_ražotājs']
+            raa_modelis = request.POST['raa_modelis']
+            raa_daudzums = request.POST['raa_daudzums']
+            raa_protokols = request.POST['raa_protokols']
+            raa_interface = request.POST['raa_interface']
+            raa_pieslegums = request.POST['raa_pieslegums']
+            piezīme = request.POST['piezīme']       
+            
+            messages.success(request, ('Kļūda pievienojot RAA iekārtu'))
+            #return redirect('add')
+            return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'raa_ražotājs':raa_ražotājs , 'raa_modelis':raa_modelis , 'raa_daudzums':raa_daudzums , 'raa_protokols':raa_protokols , 'raa_interface':raa_interface , 'raa_pieslegums':raa_pieslegums , 'piezīme':piezīme, 'raa_object_data':raa_object_data })
+        messages.success(request, ('RAA iekārta ir pievienota datubāzei'))
+        return redirect('home')
+    else:
+        return render(request, 'add_raa.html', { 'raa_object_data':raa_object_data })
 
 
-
+def register(request):
+    if request.method == 'POST':
+        form = forms.RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #username = form.cleaned_data.get('username')
+            #raw_password = form.cleaned_data.get('password1')
+            #user = authenticate(username=username, password=raw_password)
+            #login(request, user)
+            #return redirect('list')
+            return redirect('login')
+    else:
+        form = forms.RegisterForm()
+    return render(request, 'register.html', {'form': form})

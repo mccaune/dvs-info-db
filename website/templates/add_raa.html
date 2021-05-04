@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br/>
+    <center>
+        <h1>Pievienot jaunu RAA iekārtu</h1>
+    </center>
+    <br/>
+
+    <form method="POST" action="{% url 'add_raa' raa_object_data.id_dvs%}">
+    {% csrf_token %}
+        <!-- <div class="form-group mb-3">
+            <label>Reģions</label>
+            <select class="form-control" name="reģions" value="{{reģions}}">
+            <option>AR</option>
+            <option>DR</option>
+            <option>PR</option>
+            <option>RP</option>
+            <option>RR</option>
+            <option>ZA</option>
+            <option>ZR</option>
+            </select>
+        </div> -->
+
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>RAA iekārtas informācija</h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="reģions" name="reģions" value="{{raa_object_data.reģions}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Nodaļa" name="nodaļa" value="{{raa_object_data.nodaļa}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Iezīme" name="iezīme" value="{{raa_object_data.iezīme}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Objekts" name="objekts" value="{{raa_object_data.objekts}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Ražotājs" name="raa_ražotājs" value="{{ raa_ražotājs }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Modelis" name="raa_modelis" value="{{ raa_modelis }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Daudzums" name="raa_daudzums" value="{{ raa_daudzums }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Protokols" name="raa_protokols" value="{{ raa_protokols }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Interfeiss" name="raa_interface" value="{{ raa_interface }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Pieslēgums" name="raa_pieslegums" value="{{ raa_pieslegums }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="piezīme" name="piezīme" value="{{piezīme}}">
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-success btn-lg">Pievienot RAA iekārtu</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

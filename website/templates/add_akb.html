@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <br/>
     <center>
         <h1>Pievienot jaunu akumulatoru</h1>
-    </center>
+    </center><br/>
 
-    <form method="POST" action="{% url 'add_akb' %}">
+    <form method="POST" action="{% url 'add_akb' akb_object_data.id_dvs%}">
     {% csrf_token %}
         <!-- <div class="form-group mb-3">
             <label>Reģions</label>
@@ -20,53 +21,57 @@
             </select>
         </div> -->
 
-        <h3>Akumulatora informācija</h3>
-        <br/>
-
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="reģions" name="reģions" value="{{akb_object_data.reģions}}">
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>Akumulatora informācija</h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="reģions" name="reģions" value="{{akb_object_data.reģions}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Nodaļa" name="nodaļa" value="{{akb_object_data.nodaļa}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Iezīme" name="iezīme" value="{{akb_object_data.iezīme}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Objekts" name="objekts" value="{{akb_object_data.objekts}}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Modelis" name="akb_ražotājs_un_nomināli" value="{{ akb_ražotājs_un_nomināli }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Skaits" name="akb_skaits" value="{{  akb_skaits }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Ah mērījums" name="akb_izmērītais_ah" value="{{  akb_izmērītais_ah }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="R(mΩ) mērījums" name="akb_iekšējā_pretestība_mom" value="{{  akb_iekšējā_pretestība_mom }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Uzst. vieta" name="uzstādīšanas_vieta" value="{{  uzstādīšanas_vieta }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Uzst. gads" name="uzstādīšanas_gads" value="{{ uzstādīšanas_gads  }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Raž. datums" name="akb_izgatavošanas_partija_vai_datums" value="{{ akb_izgatavošanas_partija_vai_datums  }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Pārbaudes datums" name="pārbaudes_datums" value="{{ pārbaudes_datums  }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Nākošā pārbaude" name="nākošā_pārbaude" value="{{  nākošā_pārbaude }}">
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="piezīme" name="piezīme" value="{{piezīme}}">
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-success btn-lg">Pievienot akumulatoru</button>
+            </div>
         </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Nodaļa" name="nodaļa" value="{{akb_object_data.nodaļa}}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Iezīme" name="iezīme" value="{{akb_object_data.iezīme}}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Objekts" name="akb_object_data.objekts" value="{{objekts}}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Modelis" name="akb_ražotājs_un_nomināli" value="{{ akb_ražotājs_un_nomināli }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Skaits" name="akb_skaits" value="{{  akb_skaits }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Ah mērījums" name="akb_izmērītais_ah" value="{{  akb_izmērītais_ah }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="R(mΩ) mērījums" name="akb_iekšējā_pretestība_mom" value="{{  akb_iekšējā_pretestība_mom }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Uzst. vieta" name="uzstādīšanas_vieta" value="{{  uzstādīšanas_vieta }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Uzst. gads" name="uzstādīšanas_gads" value="{{ uzstādīšanas_gads  }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Raž. datums" name="akb_izgatavošanas_partija_vai_datums" value="{{ akb_izgatavošanas_partija_vai_datums  }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Pārbaudes datums" name="pārbaudes_datums" value="{{ pārbaudes_datums  }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="Nākošā pārbaude" name="nākošā_pārbaude" value="{{  nākošā_pārbaude }}">
-        </div>
-        <div class="mb-3">
-            <input type="text" class="form-control" placeholder="piezīme" name="piezīme" value="{{piezīme}}">
-        </div>
-        <br/>
-        <button type="submit" class="btn btn-success btn-lg">Pievienot akumulatoru</button>
-        <br/><br/>
     </form>
 {% endblock %}

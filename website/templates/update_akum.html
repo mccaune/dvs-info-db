@@ -1,78 +1,85 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <br/>
     <center>
         <h1><strong>{{updated_akum.objekts}} </strong></h1>
-        <h2>Labot akumulatora datus</h2>
-        <br/>
     </center>
+    <br/>
     
     <form action="" method="POST">
         {% csrf_token %}
         <!-- {{form.as_p}} -->
-        <table class="table table table-striped table-bordered table-sm"">
-            <tbody>
-                    <tr>
-                        <th scope="row">Reģions</th>
-                        <td>{{  form.reģions }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Nodaļa</th>
-                        <td>{{  form.nodaļa }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Iezīme</th>
-                        <td>{{  form.iezīme }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Objekts</th>
-                        <td>{{  form.objekts }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Ražotājs</th>
-                        <td>{{  form.akb_ražotājs_un_nomināli }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Skaits</th>
-                        <td>{{  form.akb_skaits }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Ietilpība, Ah</th>
-                        <td>{{  form.akb_izmērītais_ah }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Iekšējā pretestība</th>
-                        <td>{{  form.akb_iekšējā_pretestība_mom }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Uzstādīšanas vieta</th>
-                        <td>{{  form.uzstādīšanas_vieta }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Uzstādīšanas gads</th>
-                        <td>{{  form.uzstādīšanas_gads }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">AKB izgatavots</th>
-                        <td>{{  form.akb_izgatavošanas_partija_vai_datums }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Pārbaudes datums</th>
-                        <td>{{  form.pārbaudes_datums }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Nākošā pārbaude</th>
-                        <td>{{  form.nākošā_pārbaude }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Piezīme</th>
-                        <td>{{  form.piezīme }}</td>
-                    </tr>
-            </tbody>
-            
-        </table>
-
-        <input type="submit" value="Labot" class="btn btn-success btn-lg"><br/><br/>
+        <div class="card text-center">
+            <div class="card-header">
+                <h2>Labot akumulatora datus</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table table-striped table-bordered table-sm ">
+                    <tbody>
+                            <tr>
+                                <th scope="row">Reģions</th>
+                                <td>{{  form.reģions }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nodaļa</th>
+                                <td>{{  form.nodaļa }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Iezīme</th>
+                                <td>{{  form.iezīme }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Objekts</th>
+                                <td>{{  form.objekts }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ražotājs</th>
+                                <td>{{  form.akb_ražotājs_un_nomināli }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Skaits</th>
+                                <td>{{  form.akb_skaits }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Ietilpība, Ah</th>
+                                <td>{{  form.akb_izmērītais_ah }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Iekšējā pretestība</th>
+                                <td>{{  form.akb_iekšējā_pretestība_mom }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Uzstādīšanas vieta</th>
+                                <td>{{  form.uzstādīšanas_vieta }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Uzstādīšanas gads</th>
+                                <td>{{  form.uzstādīšanas_gads }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">AKB izgatavots</th>
+                                <td>{{  form.akb_izgatavošanas_partija_vai_datums }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pārbaudes datums</th>
+                                <td>{{  form.pārbaudes_datums }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nākošā pārbaude</th>
+                                <td>{{  form.nākošā_pārbaude }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Piezīme</th>
+                                <td>{{  form.piezīme }}</td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted">
+                <input type="submit" value="Labot" class="btn btn-success btn-lg">
+            </div>
+        </div>
     </form>
     
 

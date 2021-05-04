@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <br/>
     <center>
         <h1 class="pb-2 pt-2">Pievienot jaunu objektu</h1>
     </center>
+    <br/>
 
     <form method="POST" action="{% url 'add' %}">
     {% csrf_token %}

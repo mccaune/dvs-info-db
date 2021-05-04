@@ -1,13 +1,16 @@
-
-from django.urls import path
+from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('login', views.login, name="login"),
+    path('register/', views.register, name= 'register'),
+    path('', include("django.contrib.auth.urls")),
     path('home', views.home, name="home"),
     path('add', views.add, name="add"),
     path('add_akb/<object_id>', views.add_akb, name="add_akb"),
+    path('add_rtu/<object_id>', views.add_rtu, name="add_rtu"),
+    path('add_raa/<object_id>', views.add_raa, name="add_raa"),
     path('single_object/<object_id>', views.single_object, name="single_object"),
     path('search_objects', views.search_objects, name="search_objects"),
     path('update_object/<object_id>', views.update_object, name="update_object"),
