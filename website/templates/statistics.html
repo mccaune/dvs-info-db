@@ -2,35 +2,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <div class="card mt-4">
-        <div class="card-header">
-            <h3>Objektu sadalījums pa reģioniem</h3>
-        </div>
-        <div class="card-body">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-4">
-                                <table class="table table table-striped table-bordered table-sm"">
-                                    <tbody>
-                                        {% for item in objektu_sadalijums_stat %}
-                                            <tr>
-                                                <th scope="row">{{ item.reģions }}</th>
-                                                <td>{{ item.objektu_skaits }}</td>
+    {% if user.is_authenticated %}
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>Objektu sadalījums pa reģioniem</h3>
+            </div>
+            <div class="card-body">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4">
+                                    <table class="table table table-striped table-bordered table-sm"">
+                                        <tbody>
+                                            {% for item in objektu_sadalijums_stat %}
+                                                <tr>
+                                                    <th scope="row">{{ item.reģions }}</th>
+                                                    <td>{{ item.objektu_skaits }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <tr class="table-info">
+                                                <th scope="row">Kopā</th>
+                                                <td>{{ kopejais_skaits }}</td>
                                             </tr>
-                                        {% endfor %}
-                                        <tr class="table-info">
-                                            <th scope="row">Kopā</th>
-                                            <td>{{ kopejais_skaits }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-8">
-                                <div style="width: 100%;">
-                                    <canvas id="objektu_sadalijums_bar_chart"></canvas>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-8">
+                                    <div style="width: 100%;">
+                                        <canvas id="objektu_sadalijums_bar_chart"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -38,205 +39,211 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    
-    <br/>
+        
+        <br/>
 
-    <center>
-        <h3>RTU ražotāji</h3>
-    </center>
-    <div class="card mb-4">
-        <div class="card-body">
-            Šeit paredzēta vieta dropdown menu izvēlnei ar kuras palīdzību iegūt statistiku par katru reģionu atsevišķi
+        <center>
+            <h3>RTU ražotāji</h3>
+        </center>
+        <div class="card mb-4">
+            <div class="card-body">
+                Šeit paredzēta vieta dropdown menu izvēlnei ar kuras palīdzību iegūt statistiku par katru reģionu atsevišķi
+            </div>
         </div>
-    </div>
-    <br/>
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
-                        <table class="table table table-striped table-bordered table-sm"">
-                            <tbody>
-                                {% for item in rtu_razotajs_stat %}
-                                    <tr>
-                                        <th scope="row">{{ item.rtu_ražotājs }}</th>
-                                        <td>{{ item.rtu_count }}</td>
+        <br/>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <table class="table table table-striped table-bordered table-sm"">
+                                <tbody>
+                                    {% for item in rtu_razotajs_stat %}
+                                        <tr>
+                                            <th scope="row">{{ item.rtu_ražotājs }}</th>
+                                            <td>{{ item.rtu_count }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr class="table-info">
+                                        <th scope="row">Kopā</th>
+                                        <td>{{ kopejais_skaits }}</td>
                                     </tr>
-                                {% endfor %}
-                                <tr class="table-info">
-                                    <th scope="row">Kopā</th>
-                                    <td>{{ kopejais_skaits }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-8">
-                        <br/>
-                        <div id="container" style="width: 100%;">
-                            <canvas id="rtu_razotajs_pie_chart"></canvas>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-8">
+                            <br/>
+                            <div id="container" style="width: 100%;">
+                                <canvas id="rtu_razotajs_pie_chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br/>
+        <br/>
 
-    <center>
-        <h3>RTU sadalījums pēc uzstādīšanas gada</h3>
-    </center>
-    <div class="card mb-4">
-        <div class="card-body">
-            Šeit paredzēta vieta dropdown menu izvēlnei ar kuras palīdzību iegūt statistiku par katru reģionu atsevišķi
+        <center>
+            <h3>RTU sadalījums pēc uzstādīšanas gada</h3>
+        </center>
+        <div class="card mb-4">
+            <div class="card-body">
+                Šeit paredzēta vieta dropdown menu izvēlnei ar kuras palīdzību iegūt statistiku par katru reģionu atsevišķi
+            </div>
         </div>
-    </div>
-    <br/>
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
-                        <table class="table table table-striped table-bordered table-sm"">
-                            <tbody>
-                                {% for item in rtu_vecums_stat %}
-                                    <tr>
-                                        <th scope="row">{{ item.rtu_gads }}</th>
-                                        <td>{{ item.rtu_skaits }}</td>
+        <br/>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <table class="table table table-striped table-bordered table-sm"">
+                                <tbody>
+                                    {% for item in rtu_vecums_stat %}
+                                        <tr>
+                                            <th scope="row">{{ item.rtu_gads }}</th>
+                                            <td>{{ item.rtu_skaits }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr class="table-info">
+                                        <th scope="row">Kopā</th>
+                                        <td>{{ kopejais_skaits }}</td>
                                     </tr>
-                                {% endfor %}
-                                <tr class="table-info">
-                                    <th scope="row">Kopā</th>
-                                    <td>{{ kopejais_skaits }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-8">
-                        <div style="width: 100%;">
-                            <canvas id="rtu_gads_line_chart"></canvas>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-8">
+                            <div style="width: 100%;">
+                                <canvas id="rtu_gads_line_chart"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <br/>
+        <br/>
 
-    
-    
-
-    <!-- <div>
-        <table class="table table table-striped table-bordered table-sm"">
-            <tbody>
-                {% for item in rtu_razotajs_stat %}
-                    <tr>
-                        <th scope="row">{{ item.rtu_ražotājs }}</th>
-                        <td>{{ item.rtu_count }}</td>
-                    </tr>
-                {% endfor %}
-                <tr class="table-info">
-                    <th scope="row">Kopā</th>
-                    <td>{{ kopejais_skaits }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
+        
         
 
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script>
-
-    var config = {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: {{ data|safe }},
-                backgroundColor: ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#a8dadc', '#9c6644', '#b08968', '#ddb892', '#e6ccb2', '#f2cc8f', '#ede0d4', '#ffcdb2'],
-                label: 'RTU skaits'
-            }],
-            labels: {{ labels|safe }}
-        },
-        options: {
-            responsive: true,
+        <!-- <div>
+            <table class="table table table-striped table-bordered table-sm"">
+                <tbody>
+                    {% for item in rtu_razotajs_stat %}
+                        <tr>
+                            <th scope="row">{{ item.rtu_ražotājs }}</th>
+                            <td>{{ item.rtu_count }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr class="table-info">
+                        <th scope="row">Kopā</th>
+                        <td>{{ kopejais_skaits }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
             
-                legend: {
-                    position: 'right',
-                }
-            
-        }
-    };
 
-    var config2 = {
-        type: 'bar',
-        data: {
-            datasets: [{
-                data: {{ data_sadalijums|safe }},
-                backgroundColor: ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#a8dadc', '#9c6644', '#b08968', '#ddb892', '#e6ccb2', '#f2cc8f', '#ede0d4', '#ffcdb2'],
-                label: 'RTU skaits'
-            }],
-            labels: {{ labels_sadalijums|safe }}
-        },
-        options: {
-            responsive: true,
-            
-                legend: {
-                    position: 'bottom',
-                    display: false,
-                },
-                title: {
-                    display: true,
-                    text: 'RTU sadalījums'
-                }
-            
-        }
-    };
 
-    var config3 = {
-        type: 'line',
-        data: {
-            datasets: [{
-                data: {{ data_vecums|safe }},
-                borderColor: ['#ffadad'],
-                label: 'RTU skaits',
-                fill: false,
-                pointStyle: 'circle',
-                pointRadius: 6
-            }],
-            labels: {{ labels_vecums|safe }}
-        },
-        options: {
-            responsive: true,
-            
-                legend: {
-                    position: 'bottom',
-                    display: false,
-                },
-                title: {
-                    display: true,
-                    text: 'RTU sadalījums pēc uzstādīšanas gada'
-                },
-                labels: {
-                    usePointStyle: true,
-                }
-            
-        }
-    };
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script>
 
-    window.onload = function() {
-        var ctx = document.getElementById('rtu_razotajs_pie_chart').getContext('2d');
-        window.myPie = new Chart(ctx, config);
-        var ctx2 = document.getElementById('objektu_sadalijums_bar_chart').getContext('2d');
-        window.myPie = new Chart(ctx2, config2);
-        var ctx3 = document.getElementById('rtu_gads_line_chart').getContext('2d');
-        window.myPie = new Chart(ctx3, config3)
-    };
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: {{ data|safe }},
+                    backgroundColor: ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#a8dadc', '#9c6644', '#b08968', '#ddb892', '#e6ccb2', '#f2cc8f', '#ede0d4', '#ffcdb2'],
+                    label: 'RTU skaits'
+                }],
+                labels: {{ labels|safe }}
+            },
+            options: {
+                responsive: true,
+                
+                    legend: {
+                        position: 'right',
+                    }
+                
+            }
+        };
 
-    </script>
+        var config2 = {
+            type: 'bar',
+            data: {
+                datasets: [{
+                    data: {{ data_sadalijums|safe }},
+                    backgroundColor: ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#a8dadc', '#9c6644', '#b08968', '#ddb892', '#e6ccb2', '#f2cc8f', '#ede0d4', '#ffcdb2'],
+                    label: 'RTU skaits'
+                }],
+                labels: {{ labels_sadalijums|safe }}
+            },
+            options: {
+                responsive: true,
+                
+                    legend: {
+                        position: 'bottom',
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'RTU sadalījums'
+                    }
+                
+            }
+        };
 
+        var config3 = {
+            type: 'line',
+            data: {
+                datasets: [{
+                    data: {{ data_vecums|safe }},
+                    borderColor: ['#ffadad'],
+                    label: 'RTU skaits',
+                    fill: false,
+                    pointStyle: 'circle',
+                    pointRadius: 6
+                }],
+                labels: {{ labels_vecums|safe }}
+            },
+            options: {
+                responsive: true,
+                
+                    legend: {
+                        position: 'bottom',
+                        display: false,
+                    },
+                    title: {
+                        display: true,
+                        text: 'RTU sadalījums pēc uzstādīšanas gada'
+                    },
+                    labels: {
+                        usePointStyle: true,
+                    }
+                
+            }
+        };
+
+        window.onload = function() {
+            var ctx = document.getElementById('rtu_razotajs_pie_chart').getContext('2d');
+            window.myPie = new Chart(ctx, config);
+            var ctx2 = document.getElementById('objektu_sadalijums_bar_chart').getContext('2d');
+            window.myPie = new Chart(ctx2, config2);
+            var ctx3 = document.getElementById('rtu_gads_line_chart').getContext('2d');
+            window.myPie = new Chart(ctx3, config3)
+        };
+
+        </script>
+
+    {% else %}
+        <br/>
+        <div class="card-body">
+            Please login to access data  <a href="{% url 'login' %}">Login</a> 
+        </div>
+    {% endif %}  
+    
 {% endblock %}
 
 

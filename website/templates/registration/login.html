@@ -23,8 +23,27 @@
                 <div class="measure">
                     <form method="POST" class="ba b--transparent ph0 mh0">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="submit" value="Login" class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib">
+
+
+                        <!-- {{ form.as_p }}
+                        <input type="submit" value="Login" class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"> -->
+
+                        {{ form.non_field_errors }}
+                        <div class="form-group mb2">
+
+                            <label class="db fw6 lh-copy f6" for="{{ form.username.id_for_label }}">Lietotājs:</label>
+                            {{ form.username }}
+                            {{ form.username.errors }}
+
+                        </div>
+                        <div class="form-group">
+
+                            <label class="db fw6 lh-copy f6" for="{{ form.password.id_for_label }}">Parole:</label>
+                            {{ form.password }}
+                            {{ form.password.errors }}
+                        </div>
+                        <button class="mt2 b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit">Pievienoties</button>
+
                         <!-- <div class="mt3">
                             <label class="db fw6 lh-copy f6">Lietotājs</label>
                             <input

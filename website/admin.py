@@ -10,3 +10,4 @@ admin.site.register(DvsInfoDbAkbCsv)
 admin.site.register(DvsInfoDbRaaIekrtaCsv)
 admin.site.register(DvsInfoDbRtuIekrtaCsv)
 admin.site.register(RTUrazotajs)
+

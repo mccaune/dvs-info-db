@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from .models import DvsInfoDbCsv, DvsInfoDbAkbCsv, DvsInfoDbRaaIekrtaCsv, DvsInfoDbRtuIekrtaCsv, RTUrazotajs, ObjektuSadalijums, RTUvecums
-from .forms import ObjectForm, AkumForm, RtuForm, RaaForm
+from .forms import ObjectForm, AkumForm, RtuForm, RaaForm, RegisterForm
 from django.contrib import messages
 from django.views import generic
 from django.contrib.auth.models import Permission, User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required, permission_required
-from website import forms
+#from website import forms
+#from website import models
 
 def test(request):
     main_dvs = DvsInfoDbCsv.objects.all
@@ -15,13 +16,12 @@ def test(request):
 def index(request):
     return render(request, 'index.html', {})
 
-def login(request):
-    return render(request, 'login.html', {})
-
+@login_required(login_url='login')
 def home(request):
     main_dvs = DvsInfoDbCsv.objects.all
     return render(request, 'home.html', {'main_dvs': main_dvs})
 
+@login_required(login_url='login')
 def statistics(request):
     rtu_razotajs_stat = RTUrazotajs.objects.all
     objektu_sadalijums_stat = ObjektuSadalijums.objects.all
@@ -61,6 +61,7 @@ def statistics(request):
     labels_vecums[0] = 0
     return render(request, 'statistics.html', { 'rtu_razotajs_stat': rtu_razotajs_stat, 'labels': labels, 'data': data, 'kopejais_skaits': kopejais_skaits, 'percent': percent, 'labels_sadalijums': labels_sadalijums, 'data_sadalijums': data_sadalijums, 'objektu_sadalijums_stat': objektu_sadalijums_stat, 'labels_vecums': labels_vecums, 'data_vecums': data_vecums, 'rtu_vecums_stat': rtu_vecums_stat  })
 
+@login_required(login_url='login')
 def single_object(request, object_id):
     single_object = DvsInfoDbCsv.objects.get(pk = object_id)
     single_object_akb = DvsInfoDbAkbCsv.objects.all
@@ -68,6 +69,7 @@ def single_object(request, object_id):
     single_object_raa = DvsInfoDbRaaIekrtaCsv.objects.all
     return render(request, 'single_object.html', {'single_object': single_object, 'single_object_akb': single_object_akb, 'single_object_rtu': single_object_rtu, 'single_object_raa': single_object_raa})
 
+@login_required(login_url='login')
 def search_objects (request):
     if request.method == 'POST':
         meklesana = request.POST.get('meklesana')
@@ -75,11 +77,8 @@ def search_objects (request):
         return render(request, 'search_objects.html', {'meklesana': meklesana, 'mekletais_objekts': mekletais_objekts})
     else:
         return render(request, 'search_objects.html', {})
-# def show_object(request, object_id):
-#     object_to_get = DvsInfoDbCsv.objects.get(pk = object_id)
-#     return render(request, 'show_object.html', {'object_to_get': object_to_get})
-    
-    
+
+
 def update_object(request, object_id):
     updated_object = DvsInfoDbCsv.objects.get(pk = object_id)
     form = ObjectForm(request.POST or None, instance = updated_object)
@@ -88,6 +87,7 @@ def update_object(request, object_id):
             messages.success(request, ('Labojumi objekta datos ir veikti'))
             return redirect('home')
     return render(request, 'update_object.html', {'updated_object': updated_object, 'form': form})
+
 
 def update_akum(request, object_id):
     updated_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
@@ -98,6 +98,7 @@ def update_akum(request, object_id):
             return redirect('home')
     return render(request, 'update_akum.html', {'updated_akum': updated_akum, 'form': form})
 
+
 def update_rtu(request, object_id):
     updated_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
     form = RtuForm(request.POST or None, instance = updated_rtu)
@@ -106,6 +107,7 @@ def update_rtu(request, object_id):
             messages.success(request, ('Labojumi RTU iekārtas datos ir veikti'))
             return redirect('home')
     return render(request, 'update_rtu.html', {'updated_rtu': updated_rtu, 'form': form})
+
 
 def update_raa(request, object_id):
     updated_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
@@ -117,11 +119,6 @@ def update_raa(request, object_id):
     return render(request, 'update_raa.html', {'updated_raa': updated_raa, 'form': form})
 
 
-
-# class ModelDeleteView(DeleteView):
-#     model = ObjectForm(request.POST or None, instance = delete_object)
-#     template_name = "delete_object.html"
-
 def delete_object(request, object_id):
     deleted_object = DvsInfoDbCsv.objects.get(pk = object_id)
     form = ObjectForm(request.POST or None, instance = deleted_object)
@@ -131,6 +128,7 @@ def delete_object(request, object_id):
             messages.success(request, ('Objekta dati ir izdzēsti'))
             return redirect('home')
     return render(request, 'delete_object.html', {'deleted_object': deleted_object, 'form': form})
+
 
 def delete_akum(request, object_id):
     deleted_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
@@ -142,6 +140,7 @@ def delete_akum(request, object_id):
             return redirect('home')
     return render(request, 'delete_akum.html', {'deleted_akum': deleted_akum, 'form': form})
 
+
 def delete_rtu(request, object_id):
     deleted_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
     form = RtuForm(request.POST or None, instance = deleted_rtu)
@@ -151,6 +150,7 @@ def delete_rtu(request, object_id):
             messages.success(request, ('RTU iekārtas dati ir izdzēsti'))
             return redirect('home')
     return render(request, 'delete_rtu.html', {'deleted_rtu': deleted_rtu, 'form': form})
+
 
 def delete_raa(request, object_id):
     deleted_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
@@ -162,7 +162,7 @@ def delete_raa(request, object_id):
             return redirect('home')
     return render(request, 'delete_raa.html', {'deleted_raa': deleted_raa, 'form': form})
 
-    
+
 def add(request):
     if request.method == 'POST':
         form = ObjectForm(request.POST or None)
@@ -209,7 +209,8 @@ def add(request):
         return redirect('home')
     else:
         return render(request, 'add.html', {})
-    
+
+
 def add_akb(request, object_id):
     akb_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
     if request.method == 'POST':
@@ -240,6 +241,7 @@ def add_akb(request, object_id):
     else:
         return render(request, 'add_akb.html', { 'akb_object_data':akb_object_data })
 
+
 def add_rtu(request, object_id):
     rtu_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
     if request.method == 'POST':
@@ -266,7 +268,8 @@ def add_rtu(request, object_id):
         return redirect('home')
     else:
         return render(request, 'add_rtu.html', { 'rtu_object_data':rtu_object_data })
-    
+
+
 def add_raa(request, object_id):
     raa_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
     if request.method == 'POST':
@@ -297,7 +300,7 @@ def add_raa(request, object_id):
 
 def register(request):
     if request.method == 'POST':
-        form = forms.RegisterForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             #username = form.cleaned_data.get('username')
@@ -307,5 +310,5 @@ def register(request):
             #return redirect('list')
             return redirect('login')
     else:
-        form = forms.RegisterForm()
+        form = RegisterForm()
     return render(request, 'register.html', {'form': form})

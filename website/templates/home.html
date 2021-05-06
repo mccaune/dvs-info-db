@@ -1,106 +1,112 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- <h1>DVS informatīvā datubāze</h1> -->
-        <!-- <br/><br/>
-        <table class="table table table-striped table-bordered table-hover table-sm"">
-            <thead>
-            <tr>
-                <th scope="col">Reģions</th>
-                <th scope="col">Nodaļa</th>
-                <th scope="col">Objekta OA</th>
-                <th scope="col">Objekta Nosaukums</th>
-                <th scope="col">Darbības</th>
-            </tr>
-            </thead>
-            <tbody>
-                {% for item in main_dvs %}
-                    <tr>
-                        
-                        <td>{{item.reģions }}</td>
-                        <td>{{ item.nodaļa }}</td>
-                        <td><a href="{% url 'single_object' item.id_dvs %}">{{ item.objekts }}</a></td>
-                        <td>{{ item.objekta_nosaukums }}</td>
-                        <td align="center">
-                            <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                            <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table> -->
+    {% if user.is_authenticated %}
+        <!-- <h1>DVS informatīvā datubāze</h1> -->
+            <!-- <br/><br/>
+            <table class="table table table-striped table-bordered table-hover table-sm"">
+                <thead>
+                <tr>
+                    <th scope="col">Reģions</th>
+                    <th scope="col">Nodaļa</th>
+                    <th scope="col">Objekta OA</th>
+                    <th scope="col">Objekta Nosaukums</th>
+                    <th scope="col">Darbības</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for item in main_dvs %}
+                        <tr>
+                            
+                            <td>{{item.reģions }}</td>
+                            <td>{{ item.nodaļa }}</td>
+                            <td><a href="{% url 'single_object' item.id_dvs %}">{{ item.objekts }}</a></td>
+                            <td>{{ item.objekta_nosaukums }}</td>
+                            <td align="center">
+                                <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table> -->
 
-        <main>
-            <div class="container-fluid w-100">
-                <!-- <h1 class="mt-4">Tables</h1> -->
-                <!-- <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item">šeit </li>
-                    <li class="breadcrumb-item active">Tables</li>
-                </ol> -->
-                <br/>
-                
-                <div class="card mb-4">
-                    <div class="card-body">
-                        Šeit paredzēta vieta dropdown menu izvēlnei
+            <main>
+                <div class="container-fluid w-100">
+                    <!-- <h1 class="mt-4">Tables</h1> -->
+                    <!-- <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">šeit </li>
+                        <li class="breadcrumb-item active">Tables</li>
+                    </ol> -->
+                    <br/>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            Šeit paredzēta vieta dropdown menu izvēlnei
+                        </div>
                     </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table mr-1"></i>
-                        DVS objektu datu tabula
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Reģions</th>
-                                        <th>Nodaļa</th>
-                                        <th>Objekta OA</th>
-                                        <th>Objekta Nosaukums</th>
-                                        <th>RTU ražotājs</th>
-                                        <th>IP adrese</th>
-                                        <th>Pieslēguma veids</th>
-                                        <th>Darbības</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Reģions</th>
-                                        <th>Nodaļa</th>
-                                        <th>Objekta OA</th>
-                                        <th>Objekta Nosaukums</th>
-                                        <th>RTU ražotājs</th>
-                                        <th>IP adrese</th>
-                                        <th>Pieslēguma veids</th>
-                                        <th>Darbības</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    {% for item in main_dvs %}
-                                    <tr>
-                                        <td>{{item.reģions }}</td>
-                                        <td>{{ item.nodaļa }}</td>
-                                        <td><a href="{% url 'single_object' item.id_dvs %}">{{ item.objekts }}</a></td>
-                                        <td>{{ item.objekta_nosaukums }}</td>
-                                        <td>{{ item.rtu_ražotājs }}</td>
-                                        <td>{{ item.rtu_ip_adrese }}</td>
-                                        <td>{{ item.pieslēguma_veids }}</td>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table mr-1"></i>
+                            DVS objektu datu tabula
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Reģions</th>
+                                            <th>Nodaļa</th>
+                                            <th>Objekta OA</th>
+                                            <th>Objekta Nosaukums</th>
+                                            <th>RTU ražotājs</th>
+                                            <th>IP adrese</th>
+                                            <th>Pieslēguma veids</th>
+                                            <th>Darbības</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Reģions</th>
+                                            <th>Nodaļa</th>
+                                            <th>Objekta OA</th>
+                                            <th>Objekta Nosaukums</th>
+                                            <th>RTU ražotājs</th>
+                                            <th>IP adrese</th>
+                                            <th>Pieslēguma veids</th>
+                                            <th>Darbības</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for item in main_dvs %}
+                                        <tr>
+                                            <td>{{item.reģions }}</td>
+                                            <td>{{ item.nodaļa }}</td>
+                                            <td><a href="{% url 'single_object' item.id_dvs %}">{{ item.objekts }}</a></td>
+                                            <td>{{ item.objekta_nosaukums }}</td>
+                                            <td>{{ item.rtu_ražotājs }}</td>
+                                            <td>{{ item.rtu_ip_adrese }}</td>
+                                            <td>{{ item.pieslēguma_veids }}</td>
 
-                                        <td align="center">
-                                            <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                                            <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                                            <td align="center">
+                                                <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                                <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        
+            </main>
+    {% else %}
+        <br/>
+        <div class="card-body">
+            Please login to access data  <a href="{% url 'login' %}">Login</a> 
+        </div>
+    {% endif %}        
 
-    
+        
 {% endblock %}

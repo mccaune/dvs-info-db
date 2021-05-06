@@ -2,305 +2,312 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <center>
-        <h1 class="mt-2 mb-2"><strong>{{ single_object.objekts }}  {{ single_object.objekta_nosaukums }}</strong></h1>
-    </center>
+    {% if user.is_authenticated %}
+        <center>
+            <h1 class="mt-2 mb-2"><strong>{{ single_object.objekts }}  {{ single_object.objekta_nosaukums }}</strong></h1>
+        </center>
 
-    
-    
-    <div class="card">
-        <div class="card-header">
-            <div class="row row-cols-lg-auto align-items-center">
-                <h3>Kopējā informācija</h3>
-                <a href="{% url 'update_object' single_object.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table table-striped table-bordered table-sm ">
-                <!-- <thead>
-                <tr>
-                    <th scope="col">Pazīme</th>
-                    <th scope="col">Vērtība</th>
-                </tr>
-                </thead> -->
-                <tbody>
-                        <tr>
-                            <th scope="row">Reģions</th>
-                            <td>{{ single_object.reģions }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Nodaļa</th>
-                            <td>{{ single_object.nodaļa }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Iezīme</th>
-                            <td>{{ single_object.iezīme }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Objekts</th>
-                            <td>{{ single_object.objekts }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Nosaukums</th>
-                            <td>{{ single_object.objekta_nosaukums }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Adrese</th>
-                            <td><a href="https://www.google.com/maps/dir//{{single_object.gps_n}},{{single_object.gps_e}}/@{{single_object.gps_n}},{{single_object.gps_e}},12z/data=!4m2!4m1!3e2" class="btn btn-outline-secondary btn-sm" target="_blank">{{ single_object.adrese }}</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Atbidības teritorija</th>
-                            <td>{{ single_object.atbidības_teritorija }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Tehniskais ID nr.</th>
-                            <td>{{ single_object.tehn_id  }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">GPS N</th>
-                            <td>{{ single_object.gps_n }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">GPS E</th>
-                            <td>{{ single_object.gps_e }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">ĢIS X</th>
-                            <td>{{ single_object.ģis_x }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">ĢIS Y</th>
-                            <td>{{ single_object.ģis_y }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Pieslēguma veids</th>
-                            <td>{{ single_object.pieslēguma_veids }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Strādā ar 2 datu centriem</th>
-                            <td>{{ single_object.darbs_ar_2_centriem }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Garantētā barošana </th>
-                            <td>{{ single_object.garantētā_barošana  }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RTU ražotājs</th>
-                            <td>{{ single_object.rtu_ražotājs }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RTU 2. ražotājs</th>
-                            <td>{{ single_object.rtu_2_ražotājs }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Objekta statuss</th>
-                            <td>{{ single_object.status }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">RTU IP adrese</th>
-                            <td>{{ single_object.rtu_ip_adrese  }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">NFE tabula</th>
-                            <td>{{ single_object.nfe_tabula }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Protokols ar SCADA</th>
-                            <td>{{ single_object.protokols_ar_scada }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Protokols ar AST</th>
-                            <td>{{ single_object.protokols_ar_ast }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Saite ar slēgiekārtu nr.1</th>
-                            <td>{{ single_object.dpp_1_saite_ar_slēgiekārtu }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Saite ar slēgiekārtu nr.2</th>
-                            <td>{{ single_object.dpp_2_saite_ar_slēgiekārtu }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">J.sl. skaits</th>
-                            <td>{{ single_object.js }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">IO skaits</th>
-                            <td>{{ single_object.io }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">TS skaits</th>
-                            <td>{{ single_object.ts }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">TV skaits</th>
-                            <td>{{ single_object.tv }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">TM skaits</th>
-                            <td>{{ single_object.tm }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Rekonstrukcijas gads</th>
-                            <td>{{ single_object.rekonstrukcijas_gads }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Vecākās komponentes gads</th>
-                            <td>{{ single_object.vec_komp_gads }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Piezīmes</th>
-                            <td>{{ single_object.piezīme }}</td>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <br/>
-
-
-    <div class="card">
-        <div class="card-header">
-            <div class="row row-cols-lg-auto align-items-center">
-                <h3>Akumulatoru informācija</h3>
-                <a href="{% url 'add_akb' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot akumulatoru</a> 
-            </div>
-        </div>
-        <div class="card-body">
-            <table class="table table table-striped table-bordered table-sm table-responsive">
-                <thead>
-                <tr>
-                    <th scope="col">Modelis</th>
-                    <th scope="col">Skaits</th>
-                    <th scope="col">Ah mērījums</th>
-                    <th scope="col">R(mΩ) mērījums</th>
-                    <th scope="col">Uzst. vieta</th>
-                    <th scope="col">Uzst. gads</th>
-                    <th scope="col">Raž. datums</th>
-                    <th scope="col">Pārbaudes datums</th>
-                    <th scope="col">Nākošā pārbaude</th>
-                    <th scope="col">Piezīme</th>
-                    <th scope="col">Darbības</th>
-                </tr>
-                </thead>
-                <tbody>
         
-            {% for item in single_object_akb %}
-                {% if single_object.objekts == item.objekts %}
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="row row-cols-lg-auto align-items-center">
+                    <h3>Kopējā informācija</h3>
+                    <a href="{% url 'update_object' single_object.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table table-striped table-bordered table-sm ">
+                    <!-- <thead>
                     <tr>
-                        <td>{{ item.akb_ražotājs_un_nomināli }}</td>
-                        <td>{{ item.akb_skaits  }}</td>
-                        <td>{{ item.akb_izmērītais_ah }}</td>
-                        <td>{{ item.akb_iekšējā_pretestība_mom }}</td>
-                        <td>{{ item.uzstādīšanas_vieta }}</td>
-                        <td>{{ item.uzstādīšanas_gads }}</td>
-                        <td>{{ item.akb_izgatavošanas_partija_vai_datums }}</td>
-                        <td>{{ item.pārbaudes_datums }}</td>
-                        <td>{{ item.nākošā_pārbaude }}</td>
-                        <td>{{ item.piezīme }}</td>
-                        <td align="center">
-                            <a href="{% url 'update_akum' item.id_akb %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                            <a href="{% url 'delete_akum' item.id_akb %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                        </td>
+                        <th scope="col">Pazīme</th>
+                        <th scope="col">Vērtība</th>
                     </tr>
-                {% endif %}
-            {% endfor %}
-            </table>
-        </div>
-    </div>
-    <br/>
-
-    <div class="card">
-        <div class="card-header">
-            <div class="row row-cols-lg-auto align-items-center">
-                <h3>RTU informācija</h3>
-                <a href="{% url 'add_rtu' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot RTU iekārtu</a> 
+                    </thead> -->
+                    <tbody>
+                            <tr>
+                                <th scope="row">Reģions</th>
+                                <td>{{ single_object.reģions }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nodaļa</th>
+                                <td>{{ single_object.nodaļa }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Iezīme</th>
+                                <td>{{ single_object.iezīme }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Objekts</th>
+                                <td>{{ single_object.objekts }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nosaukums</th>
+                                <td>{{ single_object.objekta_nosaukums }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Adrese</th>
+                                <td><a href="https://www.google.com/maps/dir//{{single_object.gps_n}},{{single_object.gps_e}}/@{{single_object.gps_n}},{{single_object.gps_e}},12z/data=!4m2!4m1!3e2" class="btn btn-outline-secondary btn-sm" target="_blank">{{ single_object.adrese }}</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Atbidības teritorija</th>
+                                <td>{{ single_object.atbidības_teritorija }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tehniskais ID nr.</th>
+                                <td>{{ single_object.tehn_id  }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">GPS N</th>
+                                <td>{{ single_object.gps_n }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">GPS E</th>
+                                <td>{{ single_object.gps_e }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ĢIS X</th>
+                                <td>{{ single_object.ģis_x }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ĢIS Y</th>
+                                <td>{{ single_object.ģis_y }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pieslēguma veids</th>
+                                <td>{{ single_object.pieslēguma_veids }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Strādā ar 2 datu centriem</th>
+                                <td>{{ single_object.darbs_ar_2_centriem }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Garantētā barošana </th>
+                                <td>{{ single_object.garantētā_barošana  }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">RTU ražotājs</th>
+                                <td>{{ single_object.rtu_ražotājs }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">RTU 2. ražotājs</th>
+                                <td>{{ single_object.rtu_2_ražotājs }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Objekta statuss</th>
+                                <td>{{ single_object.status }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">RTU IP adrese</th>
+                                <td>{{ single_object.rtu_ip_adrese  }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">NFE tabula</th>
+                                <td>{{ single_object.nfe_tabula }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Protokols ar SCADA</th>
+                                <td>{{ single_object.protokols_ar_scada }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Protokols ar AST</th>
+                                <td>{{ single_object.protokols_ar_ast }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Saite ar slēgiekārtu nr.1</th>
+                                <td>{{ single_object.dpp_1_saite_ar_slēgiekārtu }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Saite ar slēgiekārtu nr.2</th>
+                                <td>{{ single_object.dpp_2_saite_ar_slēgiekārtu }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">J.sl. skaits</th>
+                                <td>{{ single_object.js }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">IO skaits</th>
+                                <td>{{ single_object.io }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">TS skaits</th>
+                                <td>{{ single_object.ts }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">TV skaits</th>
+                                <td>{{ single_object.tv }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">TM skaits</th>
+                                <td>{{ single_object.tm }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rekonstrukcijas gads</th>
+                                <td>{{ single_object.rekonstrukcijas_gads }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Vecākās komponentes gads</th>
+                                <td>{{ single_object.vec_komp_gads }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Piezīmes</th>
+                                <td>{{ single_object.piezīme }}</td>
+                            </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table table-striped table-bordered table-sm table-responsive">
-                <thead>
-                <tr>
-                    <th scope="col">Tips</th>
-                    <th scope="col">Ražotājs</th>
-                    <th scope="col">Modelis</th>
-                    <th scope="col">Daudzums</th>
-                    <th scope="col">Uzst. vieta</th>
-                    <th scope="col">FW versija</th>
-                    <th scope="col">Piezīme</th>
-                    <th scope="col">Darbības</th>
-                </tr>
-                </thead>
-                <tbody>
-        
-            {% for item in single_object_rtu %}
-                {% if single_object.objekts == item.objekts %}
-                    <tr>
-                        <td>{{ item.tips }}</td>
-                        <td>{{ item.iekārtas_ražotājs }}</td>
-                        <td>{{ item.modelis }}</td>
-                        <td>{{ item.daudzums }}</td>
-                        <td>{{ item.uzstadīšanas_vieta }}</td>
-                        <td>{{ item.programmaturas_versija }}</td>
-                        <td>{{ item.piezime }}</td>
-                        <td align="center">
-                            <a href="{% url 'update_rtu' item.id_rtu %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                            <a href="{% url 'delete_rtu' item.id_rtu %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        
-            </table>
-        </div>
-    </div>
-    <br/>
-    
+        <br/>
 
-    <div class="card">
-        <div class="card-header">
-            <div class="row row-cols-lg-auto align-items-center">
-                <h3>RAA informācija</h3> 
-                <a href="{% url 'add_raa' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm ">Pievienot RAA iekārtu</a> 
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row row-cols-lg-auto align-items-center">
+                    <h3>Akumulatoru informācija</h3>
+                    <a href="{% url 'add_akb' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot akumulatoru</a> 
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table table-striped table-bordered table-sm table-responsive">
+                    <thead>
+                    <tr>
+                        <th scope="col">Modelis</th>
+                        <th scope="col">Skaits</th>
+                        <th scope="col">Ah mērījums</th>
+                        <th scope="col">R(mΩ) mērījums</th>
+                        <th scope="col">Uzst. vieta</th>
+                        <th scope="col">Uzst. gads</th>
+                        <th scope="col">Raž. datums</th>
+                        <th scope="col">Pārbaudes datums</th>
+                        <th scope="col">Nākošā pārbaude</th>
+                        <th scope="col">Piezīme</th>
+                        <th scope="col">Darbības</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+            
+                {% for item in single_object_akb %}
+                    {% if single_object.objekts == item.objekts %}
+                        <tr>
+                            <td>{{ item.akb_ražotājs_un_nomināli }}</td>
+                            <td>{{ item.akb_skaits  }}</td>
+                            <td>{{ item.akb_izmērītais_ah }}</td>
+                            <td>{{ item.akb_iekšējā_pretestība_mom }}</td>
+                            <td>{{ item.uzstādīšanas_vieta }}</td>
+                            <td>{{ item.uzstādīšanas_gads }}</td>
+                            <td>{{ item.akb_izgatavošanas_partija_vai_datums }}</td>
+                            <td>{{ item.pārbaudes_datums }}</td>
+                            <td>{{ item.nākošā_pārbaude }}</td>
+                            <td>{{ item.piezīme }}</td>
+                            <td align="center">
+                                <a href="{% url 'update_akum' item.id_akb %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                <a href="{% url 'delete_akum' item.id_akb %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table table-striped table-bordered table-sm table-responsive">
-                <thead>
-                <tr>
-                    <th scope="col">Ražotājs</th>
-                    <th scope="col">Modelis</th>
-                    <th scope="col">Daudzums</th>
-                    <th scope="col">Protokols</th>
-                    <th scope="col">Interfeiss</th>
-                    <th scope="col">Pieslēgums</th>
-                    <th scope="col">Piezīme</th>
-                    <th scope="col">Darbības</th>
-                </tr>
-                </thead>
-                <tbody>
-        
-            {% for item in single_object_raa %}
-                {% if single_object.objekts == item.objekts %}
+        <br/>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row row-cols-lg-auto align-items-center">
+                    <h3>RTU informācija</h3>
+                    <a href="{% url 'add_rtu' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot RTU iekārtu</a> 
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table table-striped table-bordered table-sm table-responsive">
+                    <thead>
                     <tr>
-                        <td>{{ item.raa_ražotājs }}</td>
-                        <td>{{ item.raa_modelis }}</td>
-                        <td>{{ item.raa_daudzums }}</td>
-                        <td>{{ item.raa_protokols }}</td>
-                        <td>{{ item.raa_interface }}</td>
-                        <td>{{ item.raa_pieslegums }}</td>
-                        <td>{{ item.piezime }}</td>
-                        <td align="center">
-                            <a href="{% url 'update_raa' item.id_raa %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                            <a href="{% url 'delete_raa' item.id_raa %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                        </td>
+                        <th scope="col">Tips</th>
+                        <th scope="col">Ražotājs</th>
+                        <th scope="col">Modelis</th>
+                        <th scope="col">Daudzums</th>
+                        <th scope="col">Uzst. vieta</th>
+                        <th scope="col">FW versija</th>
+                        <th scope="col">Piezīme</th>
+                        <th scope="col">Darbības</th>
                     </tr>
-                {% endif %}
-            {% endfor %}
-            </table>
+                    </thead>
+                    <tbody>
+            
+                {% for item in single_object_rtu %}
+                    {% if single_object.objekts == item.objekts %}
+                        <tr>
+                            <td>{{ item.tips }}</td>
+                            <td>{{ item.iekārtas_ražotājs }}</td>
+                            <td>{{ item.modelis }}</td>
+                            <td>{{ item.daudzums }}</td>
+                            <td>{{ item.uzstadīšanas_vieta }}</td>
+                            <td>{{ item.programmaturas_versija }}</td>
+                            <td>{{ item.piezime }}</td>
+                            <td align="center">
+                                <a href="{% url 'update_rtu' item.id_rtu %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                <a href="{% url 'delete_rtu' item.id_rtu %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            
+                </table>
+            </div>
         </div>
-    </div>
-    <br/>
+        <br/>
+        
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row row-cols-lg-auto align-items-center">
+                    <h3>RAA informācija</h3> 
+                    <a href="{% url 'add_raa' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm ">Pievienot RAA iekārtu</a> 
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table table-striped table-bordered table-sm table-responsive">
+                    <thead>
+                    <tr>
+                        <th scope="col">Ražotājs</th>
+                        <th scope="col">Modelis</th>
+                        <th scope="col">Daudzums</th>
+                        <th scope="col">Protokols</th>
+                        <th scope="col">Interfeiss</th>
+                        <th scope="col">Pieslēgums</th>
+                        <th scope="col">Piezīme</th>
+                        <th scope="col">Darbības</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+            
+                {% for item in single_object_raa %}
+                    {% if single_object.objekts == item.objekts %}
+                        <tr>
+                            <td>{{ item.raa_ražotājs }}</td>
+                            <td>{{ item.raa_modelis }}</td>
+                            <td>{{ item.raa_daudzums }}</td>
+                            <td>{{ item.raa_protokols }}</td>
+                            <td>{{ item.raa_interface }}</td>
+                            <td>{{ item.raa_pieslegums }}</td>
+                            <td>{{ item.piezime }}</td>
+                            <td align="center">
+                                <a href="{% url 'update_raa' item.id_raa %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                <a href="{% url 'delete_raa' item.id_raa %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+        <br/>
+    {% else %}
+        <br/>
+        <div class="card-body">
+            Please login to access data  <a href="{% url 'login' %}">Login</a> 
+        </div>
+    {% endif %}   
 
 {% endblock %}
 
