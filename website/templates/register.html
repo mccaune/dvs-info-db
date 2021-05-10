@@ -21,16 +21,39 @@
                 <div class="measure">
                   <form method="post">
                     {% csrf_token %}
-                    {% for field in form %}
-                      <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}
-                        {% for error in field.errors %}
-                          <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                      </p>
-                    {% endfor %}
-                    <button type="submit" class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib">Izveidot</button>
+                    {{ form.non_field_errors }}
+                    <div class="form-group mb2">
+                        <label class="db fw6 lh-copy f6" for="{{ form.username.id_for_label }}">Lietotājvārds:</label>
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="form-group mb2">
+                      <label class="db fw6 lh-copy f6" for="{{ form.first_name.id_for_label }}">Vārds:</label>
+                      {{ form.first_name }}
+                      {{ form.first_name.errors }}
+                    </div>
+                    <div class="form-group mb2">
+                      <label class="db fw6 lh-copy f6" for="{{ form.last_name.id_for_label }}">Uzvārds:</label>
+                      {{ form.last_name }}
+                      {{ form.last_name.errors }}
+                    </div>
+                    <div class="form-group mb2">
+                      <label class="db fw6 lh-copy f6" for="{{ form.email.id_for_label }}">Epasts:</label>
+                      {{ form.email }}
+                      {{ form.email.errors }}
+                    </div>
+                    <div class="form-group mb2">
+                      <label class="db fw6 lh-copy f6" for="{{ form.password1.id_for_label }}">Parole:</label>
+                      {{ form.password1 }}
+                      {{ form.password1.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label class="db fw6 lh-copy f6" for="{{ form.password2.id_for_label }}">Parole atkārtoti:</label>
+                        {{ form.password2 }}
+                        {{ form.password2.errors }}
+                    </div>
+                    <button class="mt2 b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit">Izveidot</button>
+
                   </form>
                 </div>
             </main>

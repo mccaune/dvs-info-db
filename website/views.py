@@ -3,11 +3,12 @@ from .models import DvsInfoDbCsv, DvsInfoDbAkbCsv, DvsInfoDbRaaIekrtaCsv, DvsInf
 from .forms import ObjectForm, AkumForm, RtuForm, RaaForm, RegisterForm
 from django.contrib import messages
 from django.views import generic
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth.models import Permission, User, Group
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 #from website import forms
 #from website import models
+
 
 def test(request):
     main_dvs = DvsInfoDbCsv.objects.all
@@ -78,7 +79,7 @@ def search_objects (request):
     else:
         return render(request, 'search_objects.html', {})
 
-
+@login_required(login_url='login')
 def update_object(request, object_id):
     updated_object = DvsInfoDbCsv.objects.get(pk = object_id)
     form = ObjectForm(request.POST or None, instance = updated_object)
@@ -88,7 +89,7 @@ def update_object(request, object_id):
             return redirect('home')
     return render(request, 'update_object.html', {'updated_object': updated_object, 'form': form})
 
-
+@login_required(login_url='login')
 def update_akum(request, object_id):
     updated_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
     form = AkumForm(request.POST or None, instance = updated_akum)
@@ -98,7 +99,7 @@ def update_akum(request, object_id):
             return redirect('home')
     return render(request, 'update_akum.html', {'updated_akum': updated_akum, 'form': form})
 
-
+@login_required(login_url='login')
 def update_rtu(request, object_id):
     updated_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
     form = RtuForm(request.POST or None, instance = updated_rtu)
@@ -108,7 +109,7 @@ def update_rtu(request, object_id):
             return redirect('home')
     return render(request, 'update_rtu.html', {'updated_rtu': updated_rtu, 'form': form})
 
-
+@login_required(login_url='login')
 def update_raa(request, object_id):
     updated_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
     form = RaaForm(request.POST or None, instance = updated_raa)
@@ -118,7 +119,7 @@ def update_raa(request, object_id):
             return redirect('home')
     return render(request, 'update_raa.html', {'updated_raa': updated_raa, 'form': form})
 
-
+@login_required(login_url='login')
 def delete_object(request, object_id):
     deleted_object = DvsInfoDbCsv.objects.get(pk = object_id)
     form = ObjectForm(request.POST or None, instance = deleted_object)
@@ -129,7 +130,7 @@ def delete_object(request, object_id):
             return redirect('home')
     return render(request, 'delete_object.html', {'deleted_object': deleted_object, 'form': form})
 
-
+@login_required(login_url='login')
 def delete_akum(request, object_id):
     deleted_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
     form = AkumForm(request.POST or None, instance = deleted_akum)
@@ -140,7 +141,7 @@ def delete_akum(request, object_id):
             return redirect('home')
     return render(request, 'delete_akum.html', {'deleted_akum': deleted_akum, 'form': form})
 
-
+@login_required(login_url='login')
 def delete_rtu(request, object_id):
     deleted_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
     form = RtuForm(request.POST or None, instance = deleted_rtu)
@@ -151,7 +152,7 @@ def delete_rtu(request, object_id):
             return redirect('home')
     return render(request, 'delete_rtu.html', {'deleted_rtu': deleted_rtu, 'form': form})
 
-
+@login_required(login_url='login')
 def delete_raa(request, object_id):
     deleted_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
     form = RaaForm(request.POST or None, instance = deleted_raa)
@@ -162,7 +163,7 @@ def delete_raa(request, object_id):
             return redirect('home')
     return render(request, 'delete_raa.html', {'deleted_raa': deleted_raa, 'form': form})
 
-
+@login_required(login_url='login')
 def add(request):
     if request.method == 'POST':
         form = ObjectForm(request.POST or None)
@@ -210,7 +211,7 @@ def add(request):
     else:
         return render(request, 'add.html', {})
 
-
+@login_required(login_url='login')
 def add_akb(request, object_id):
     akb_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
     if request.method == 'POST':
@@ -241,7 +242,7 @@ def add_akb(request, object_id):
     else:
         return render(request, 'add_akb.html', { 'akb_object_data':akb_object_data })
 
-
+@login_required(login_url='login')
 def add_rtu(request, object_id):
     rtu_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
     if request.method == 'POST':
@@ -269,7 +270,7 @@ def add_rtu(request, object_id):
     else:
         return render(request, 'add_rtu.html', { 'rtu_object_data':rtu_object_data })
 
-
+@login_required(login_url='login')
 def add_raa(request, object_id):
     raa_object_data = DvsInfoDbCsv.objects.get(pk = object_id)
     if request.method == 'POST':
@@ -303,12 +304,8 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            #username = form.cleaned_data.get('username')
-            #raw_password = form.cleaned_data.get('password1')
-            #user = authenticate(username=username, password=raw_password)
-            #login(request, user)
-            #return redirect('list')
             return redirect('login')
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})
+

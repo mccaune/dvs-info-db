@@ -15,7 +15,12 @@
                 <th scope="col">Nodaļa</th>
                 <th scope="col">Objekta OA</th>
                 <th scope="col">Objekta Nosaukums</th>
-                <th scope="col">Darbības</th>
+                {% for group in request.user.groups.all %}
+                    {% if group.name == 'users_can_edit_DB' %}
+                        <th scope="col">Darbības</th>
+                    {% endif %}
+                {% endfor %}
+                
             </tr>
             </thead>
             <tbody>
@@ -25,10 +30,15 @@
                         <td>{{ item.nodaļa }}</td>
                         <td><a href="{% url 'single_object' item.id_dvs %}">{{ item.objekts }}</a></td>
                         <td>{{ item.objekta_nosaukums }}</td>
-                        <td align="center">
-                            <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a>
-                            <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a></td>
-                        </td>
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'users_can_edit_DB' %}
+                            <td align="center">
+                                <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a>
+                                <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a></td>
+                            </td>
+                            {% endif %}
+                        {% endfor %}
+                        
                     </tr>
                 {% endfor %}
             </tbody>

@@ -13,17 +13,15 @@
             <div class="card-header">
                 <div class="row row-cols-lg-auto align-items-center">
                     <h3>Kopējā informācija</h3>
-                    <a href="{% url 'update_object' single_object.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'users_can_edit_DB' %}
+                            <a href="{% url 'update_object' single_object.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="card-body">
                 <table class="table table table-striped table-bordered table-sm ">
-                    <!-- <thead>
-                    <tr>
-                        <th scope="col">Pazīme</th>
-                        <th scope="col">Vērtība</th>
-                    </tr>
-                    </thead> -->
                     <tbody>
                             <tr>
                                 <th scope="row">Reģions</th>
@@ -164,7 +162,11 @@
             <div class="card-header">
                 <div class="row row-cols-lg-auto align-items-center">
                     <h3>Akumulatoru informācija</h3>
-                    <a href="{% url 'add_akb' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot akumulatoru</a> 
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'users_can_edit_DB' %}
+                            <a href="{% url 'add_akb' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot akumulatoru</a> 
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="card-body">
@@ -181,7 +183,11 @@
                         <th scope="col">Pārbaudes datums</th>
                         <th scope="col">Nākošā pārbaude</th>
                         <th scope="col">Piezīme</th>
-                        <th scope="col">Darbības</th>
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'users_can_edit_DB' %}
+                                <th scope="col">Darbības</th>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                     </thead>
                     <tbody>
@@ -199,10 +205,14 @@
                             <td>{{ item.pārbaudes_datums }}</td>
                             <td>{{ item.nākošā_pārbaude }}</td>
                             <td>{{ item.piezīme }}</td>
-                            <td align="center">
-                                <a href="{% url 'update_akum' item.id_akb %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                                <a href="{% url 'delete_akum' item.id_akb %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                            </td>
+                            {% for group in request.user.groups.all %}
+                                {% if group.name == 'users_can_edit_DB' %}
+                                <td align="center">
+                                    <a href="{% url 'update_akum' item.id_akb %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                    <a href="{% url 'delete_akum' item.id_akb %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                                </td>
+                                {% endif %}
+                            {% endfor %}
                         </tr>
                     {% endif %}
                 {% endfor %}
@@ -215,7 +225,11 @@
             <div class="card-header">
                 <div class="row row-cols-lg-auto align-items-center">
                     <h3>RTU informācija</h3>
-                    <a href="{% url 'add_rtu' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot RTU iekārtu</a> 
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'users_can_edit_DB' %}
+                        <a href="{% url 'add_rtu' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm">Pievienot RTU iekārtu</a> 
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="card-body">
@@ -229,7 +243,11 @@
                         <th scope="col">Uzst. vieta</th>
                         <th scope="col">FW versija</th>
                         <th scope="col">Piezīme</th>
-                        <th scope="col">Darbības</th>
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'users_can_edit_DB' %}
+                                <th scope="col">Darbības</th>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                     </thead>
                     <tbody>
@@ -244,14 +262,17 @@
                             <td>{{ item.uzstadīšanas_vieta }}</td>
                             <td>{{ item.programmaturas_versija }}</td>
                             <td>{{ item.piezime }}</td>
-                            <td align="center">
-                                <a href="{% url 'update_rtu' item.id_rtu %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                                <a href="{% url 'delete_rtu' item.id_rtu %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                            </td>
+                            {% for group in request.user.groups.all %}
+                                {% if group.name == 'users_can_edit_DB' %}
+                                    <td align="center">
+                                        <a href="{% url 'update_rtu' item.id_rtu %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                        <a href="{% url 'delete_rtu' item.id_rtu %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
                         </tr>
                     {% endif %}
                 {% endfor %}
-            
                 </table>
             </div>
         </div>
@@ -262,7 +283,11 @@
             <div class="card-header">
                 <div class="row row-cols-lg-auto align-items-center">
                     <h3>RAA informācija</h3> 
-                    <a href="{% url 'add_raa' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm ">Pievienot RAA iekārtu</a> 
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'users_can_edit_DB' %}
+                            <a href="{% url 'add_raa' single_object.id_dvs%}" class="btn btn-outline-secondary btn-sm ">Pievienot RAA iekārtu</a> 
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="card-body">
@@ -276,7 +301,11 @@
                         <th scope="col">Interfeiss</th>
                         <th scope="col">Pieslēgums</th>
                         <th scope="col">Piezīme</th>
-                        <th scope="col">Darbības</th>
+                        {% for group in request.user.groups.all %}
+                            {% if group.name == 'users_can_edit_DB' %}
+                                <th scope="col">Darbības</th>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
                     </thead>
                     <tbody>
@@ -291,10 +320,15 @@
                             <td>{{ item.raa_interface }}</td>
                             <td>{{ item.raa_pieslegums }}</td>
                             <td>{{ item.piezime }}</td>
-                            <td align="center">
-                                <a href="{% url 'update_raa' item.id_raa %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                                <a href="{% url 'delete_raa' item.id_raa %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                            </td>
+                            {% for group in request.user.groups.all %}
+                                {% if group.name == 'users_can_edit_DB' %}
+                                    <td align="center">
+                                        <a href="{% url 'update_raa' item.id_raa %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
+                                        <a href="{% url 'delete_raa' item.id_raa %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                            
                         </tr>
                     {% endif %}
                 {% endfor %}
@@ -310,43 +344,3 @@
     {% endif %}   
 
 {% endblock %}
-
-
-<!-- 
-
-    <h1>DVS informatīvā datubāze</h1>
-
-        <strong>{{ single_object.reģions }} {{ single_object.nodaļa }}  {{ single_object.objekts }}</strong><br/>
-        Reģions: {{ single_object.reģions }}<br/>
-        Nodaļa: {{ single_object.nodaļa }}<br/>
-        Objekts: {{ single_object.objekts }}<br/>
-        Nosaukums: {{ single_object.objekta_nosaukums }} <br/>
-        Adrese: {{ single_object.adrese }} <br/>
-        atbidības_teritorija {{ single_object.atbidības_teritorija }} <br/>
-        tehn_id: {{ single_object.tehn_id }} <br/>
-        gps_n: {{ single_object.gps_n }} <br/>
-        gps_e: {{ single_object.gps_e }} <br/>
-        ģis_x: {{ single_object.ģis_x }} <br/>
-        ģis_y: {{ single_object.ģis_y }} <br/>
-        pieslēguma_veids: {{ single_object.pieslēguma_veids }} <br/>
-        darbs_ar_2_centriem: {{ single_object.darbs_ar_2_centriem }} <br/>
-        garantētā_barošana: {{ single_object.garantētā_barošana }} <br/>
-        rtu_ražotājs: {{ single_object.rtu_ražotājs }} <br/>
-        rtu_2_ražotājs: {{ single_object.rtu_2_ražotājs }} <br/>
-        status: {{ single_object.status }} <br/>
-        rtu_ip_adrese: {{ single_object.rtu_ip_adrese }} <br/>
-        nfe_tabula: {{ single_object.nfe_tabula }} <br/>
-        protokols_ar_scada: {{ single_object.protokols_ar_scada }} <br/>
-        protokols_ar_ast: {{ single_object.protokols_ar_ast }} <br/>
-        dpp_1_saite_ar_slēgiekārtu: {{ single_object.dpp_1_saite_ar_slēgiekārtu }} <br/>
-        dpp_2_saite_ar_slēgiekārtu: {{ single_object.dpp_2_saite_ar_slēgiekārtu }} <br/>
-        js: {{ single_object.js }} <br/>
-        io: {{ single_object.io }} <br/>
-        ts: {{ single_object.ts }} <br/>
-        tv: {{ single_object.tv }} <br/>
-        tm: {{ single_object.tm }} <br/>
-        rekonstrukcijas_gads: {{ single_object.rekonstrukcijas_gads }} <br/>
-        vec_komp_gads: {{ single_object.vec_komp_gads }} <br/>
-        piezīme: {{ single_object.piezīme }} <br/>
-        <hr>
--->
