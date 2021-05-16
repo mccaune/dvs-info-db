@@ -9,9 +9,13 @@
             <!-- <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li> -->
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'add' %}">Pievienot jaunu objektu</a>
-            </li>
+            {% for group in request.user.groups.all %}
+                {% if group.name == 'users_can_edit_DB' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add' %}">Pievienot jaunu objektu</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'statistics' %}">Datu analīze</a>
             </li>

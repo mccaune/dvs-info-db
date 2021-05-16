@@ -42,6 +42,77 @@ class ObjektuSadalijums(models.Model):
         #managed = False
         db_table = 'Objektu_skaits_reģionos'
 
+class AKB(models.Model):
+    id_akb = models.AutoField(db_column='id_AKB', primary_key=True)  # Field name made lowercase.
+    reģions = models.CharField(db_column='Reģions', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    nodaļa = models.CharField(db_column='Nodaļa', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    iezīme = models.CharField(db_column='Iezīme', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    objekts = models.CharField(db_column='Objekts', max_length=18, blank=True, null=True)  # Field name made lowercase.
+    akb_ražotājs_un_nomināli = models.CharField(db_column='AKB_Ražotājs_un_nomināli', max_length=36, blank=True, null=True)  # Field name made lowercase.
+    akb_skaits = models.IntegerField(db_column='AKB_skaits', blank=True, null=True)  # Field name made lowercase.
+    akb_izmērītais_ah = models.CharField(db_column='AKB_izmērītais_Ah', max_length=25, blank=True, null=True)  # Field name made lowercase.
+    akb_iekšējā_pretestība_mom = models.IntegerField(db_column='AKB_iekšējā_pretestība_mOm', blank=True, null=True)  # Field name made lowercase.
+    uzstādīšanas_vieta = models.CharField(db_column='Uzstādīšanas_vieta', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    uzstādīšanas_gads = models.CharField(db_column='Uzstādīšanas_gads', max_length=20, blank=True, null=True)  # Field name made lowercase.
+    akb_izgatavošanas_partija_vai_datums = models.CharField(db_column='AKB_izgatavošanas_partija_vai_datums', max_length=23, blank=True, null=True)  # Field name made lowercase.
+    pārbaudes_datums = models.CharField(db_column='Pārbaudes_datums', max_length=13, blank=True, null=True)  # Field name made lowercase.
+    nākošā_pārbaude = models.CharField(db_column='Nākošā_pārbaude', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    piezīme = models.CharField(db_column='Piezīme', max_length=59, blank=True, null=True)  # Field name made lowercase.
+    id_dvs = models.IntegerField(db_column='id_dvs', blank=True, null=True)
+    
+    def __str__(self):
+        return self.reģions + ' ' + self.nodaļa + ' ' + self.objekts
+
+    class Meta:
+        #managed = False
+        db_table = 'AKB'
+        
+class RTU(models.Model):
+    id_rtu = models.AutoField(db_column='id_RTU', primary_key=True)  # Field name made lowercase.
+    reģions = models.CharField(db_column='Reģions', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    nodaļa = models.CharField(db_column='Nodaļa', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    iezīme = models.CharField(db_column='Iezīme', max_length=5, blank=True, null=True)  # Field name made lowercase.
+    objekts = models.CharField(db_column='Objekts', max_length=17, blank=True, null=True)  # Field name made lowercase.
+    tips = models.CharField(db_column='Tips', max_length=23, blank=True, null=True)  # Field name made lowercase.
+    iekārtas_ražotājs = models.CharField(db_column='Iekārtas_Ražotājs', max_length=17, blank=True, null=True)  # Field name made lowercase.
+    modelis = models.CharField(db_column='Modelis', max_length=22, blank=True, null=True)  # Field name made lowercase.
+    daudzums = models.IntegerField(db_column='Daudzums', blank=True, null=True)  # Field name made lowercase.
+    uzstadīšanas_vieta = models.CharField(db_column='Uzstadīšanas_vieta', max_length=21, blank=True, null=True)  # Field name made lowercase.
+    programmaturas_versija = models.CharField(db_column='Programmaturas_versija', max_length=34, blank=True, null=True)  # Field name made lowercase.
+    piezime = models.CharField(db_column='Piezime', max_length=66, blank=True, null=True)  # Field name made lowercase.
+    column13 = models.CharField(db_column='Column13', max_length=18, blank=True, null=True)  # Field name made lowercase.
+    column14 = models.CharField(db_column='Column14', max_length=18, blank=True, null=True)  # Field name made lowercase.
+    column15 = models.CharField(db_column='Column15', max_length=1, blank=True, null=True)  # Field name made lowercase.
+    id_dvs = models.IntegerField(db_column='id_dvs', blank=True, null=True)
+    
+    def __str__(self):
+        return self.reģions + ' ' + self.nodaļa + ' ' + self.objekts + ' ' + self.iekārtas_ražotājs + ' ' + self.modelis
+
+    class Meta:
+        #managed = False
+        db_table = 'RTU'
+        
+class RAA(models.Model):
+    id_raa = models.AutoField(db_column='id_RAA', primary_key=True)  # Field name made lowercase.
+    reģions = models.CharField(db_column='Reģions', max_length=2, blank=True, null=True)  # Field name made lowercase.
+    nodaļa = models.CharField(db_column='Nodaļa', max_length=10, blank=True, null=True)  # Field name made lowercase.
+    iezīme = models.CharField(db_column='Iezīme', max_length=5, blank=True, null=True)  # Field name made lowercase.
+    objekts = models.CharField(db_column='Objekts', max_length=14, blank=True, null=True)  # Field name made lowercase.
+    raa_ražotājs = models.CharField(db_column='RAA_Ražotājs', max_length=16, blank=True, null=True)  # Field name made lowercase.
+    raa_modelis = models.CharField(db_column='RAA_Modelis', max_length=17, blank=True, null=True)  # Field name made lowercase.
+    raa_daudzums = models.IntegerField(db_column='RAA_daudzums', blank=True, null=True)  # Field name made lowercase.
+    raa_protokols = models.CharField(db_column='RAA_Protokols', max_length=15, blank=True, null=True)  # Field name made lowercase.
+    raa_interface = models.CharField(db_column='RAA_Interface', max_length=15, blank=True, null=True)  # Field name made lowercase.
+    raa_pieslegums = models.CharField(db_column='RAA_pieslegums', max_length=13, blank=True, null=True)  # Field name made lowercase.
+    piezime = models.CharField(db_column='Piezime', max_length=42, blank=True, null=True)  # Field name made lowercase.
+    id_dvs = models.IntegerField(db_column='id_dvs', blank=True, null=True)
+    
+    def __str__(self):
+        return self.reģions + ' ' + self.nodaļa + ' ' + self.objekts + ' ' + self.raa_ražotājs + ' ' + self.raa_modelis
+
+    class Meta:
+        #managed = False
+        db_table = 'RAA'
 
 class DvsInfoDbAkbCsv(models.Model):
     id_akb = models.AutoField(db_column='id_AKB', primary_key=True)  # Field name made lowercase.

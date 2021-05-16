@@ -34,13 +34,7 @@
 
             <main>
                 <div class="container-fluid w-100">
-                    <!-- <h1 class="mt-4">Tables</h1> -->
-                    <!-- <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item">šeit </li>
-                        <li class="breadcrumb-item active">Tables</li>
-                    </ol> -->
                     <br/>
-                    
                     <div class="card mb-4">
                         <div class="card-body">
                             Šeit paredzēta vieta dropdown menu izvēlnei
@@ -63,7 +57,6 @@
                                             <th>RTU ražotājs</th>
                                             <th>IP adrese</th>
                                             <th>Pieslēguma veids</th>
-                                            <th>Darbības</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -75,7 +68,6 @@
                                             <th>RTU ražotājs</th>
                                             <th>IP adrese</th>
                                             <th>Pieslēguma veids</th>
-                                            <th>Darbības</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -88,11 +80,6 @@
                                             <td>{{ item.rtu_ražotājs }}</td>
                                             <td>{{ item.rtu_ip_adrese }}</td>
                                             <td>{{ item.pieslēguma_veids }}</td>
-
-                                            <td align="center">
-                                                <a href="{% url 'update_object' item.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
-                                                <a href="{% url 'delete_object' item.id_dvs %}" class="btn btn-outline-danger btn-sm">Dzēst</a>
-                                            </td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import DvsInfoDbCsv, DvsInfoDbAkbCsv, DvsInfoDbRaaIekrtaCsv, DvsInfoDbRtuIekrtaCsv, RTUrazotajs, ObjektuSadalijums, RTUvecums
+from .models import DvsInfoDbCsv, DvsInfoDbAkbCsv, DvsInfoDbRaaIekrtaCsv, DvsInfoDbRtuIekrtaCsv, RTUrazotajs, ObjektuSadalijums, RTUvecums, AKB, RTU, RAA
 from .forms import ObjectForm, AkumForm, RtuForm, RaaForm, RegisterForm
 from django.contrib import messages
 from django.views import generic
@@ -86,37 +86,40 @@ def update_object(request, object_id):
     if form.is_valid():
             form.save()
             messages.success(request, ('Labojumi objekta datos ir veikti'))
-            return redirect('home')
+            return redirect('single_object', object_id = updated_object.id_dvs)
     return render(request, 'update_object.html', {'updated_object': updated_object, 'form': form})
 
 @login_required(login_url='login')
 def update_akum(request, object_id):
     updated_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
     form = AkumForm(request.POST or None, instance = updated_akum)
+    upd_akb_obj_id = AKB.objects.get(pk = object_id)
     if form.is_valid():
             form.save()
             messages.success(request, ('Labojumi akumulatora datos ir veikti'))
-            return redirect('home')
+            return redirect('single_object', object_id = upd_akb_obj_id.id_dvs)
     return render(request, 'update_akum.html', {'updated_akum': updated_akum, 'form': form})
 
 @login_required(login_url='login')
 def update_rtu(request, object_id):
     updated_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
     form = RtuForm(request.POST or None, instance = updated_rtu)
+    upd_rtu_obj_id = RTU.objects.get(pk = object_id)
     if form.is_valid():
             form.save()
             messages.success(request, ('Labojumi RTU iekārtas datos ir veikti'))
-            return redirect('home')
+            return redirect('single_object', object_id = upd_rtu_obj_id.id_dvs)
     return render(request, 'update_rtu.html', {'updated_rtu': updated_rtu, 'form': form})
 
 @login_required(login_url='login')
 def update_raa(request, object_id):
     updated_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
     form = RaaForm(request.POST or None, instance = updated_raa)
+    upd_raa_obj_id = RAA.objects.get(pk = object_id)
     if form.is_valid():
             form.save()
             messages.success(request, ('Labojumi RAA iekārtas datos ir veikti'))
-            return redirect('home')
+            return redirect('single_object', object_id = upd_raa_obj_id.id_dvs)
     return render(request, 'update_raa.html', {'updated_raa': updated_raa, 'form': form})
 
 @login_required(login_url='login')
@@ -134,33 +137,65 @@ def delete_object(request, object_id):
 def delete_akum(request, object_id):
     deleted_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
     form = AkumForm(request.POST or None, instance = deleted_akum)
+    akb_obj_id = AKB.objects.get(pk = object_id)
     if form.is_valid():
             form.save()
             deleted_akum.delete()
             messages.success(request, ('Akumulatora dati ir izdzēsti'))
-            return redirect('home')
+            return redirect('single_object', object_id = akb_obj_id.id_dvs)
     return render(request, 'delete_akum.html', {'deleted_akum': deleted_akum, 'form': form})
+
+# @login_required(login_url='login')
+# def delete_akum(request, object_id):
+#     deleted_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
+#     form = AkumForm(request.POST or None, instance = deleted_akum)
+#     dvs_all_obj = DvsInfoDbCsv.objects.all
+#     redirect_id = 10
+#     for x in dvs_all_obj:
+#         if x.objekts == delete_akum.objekts:
+#             redirect_id = x.id_dvs
+#     if form.is_valid():
+#             form.save()
+#             deleted_akum.delete()
+#             messages.success(request, ('Akumulatora dati ir izdzēsti'))
+#             return redirect('single_object', object_id = redirect_id)
+#     return render(request, 'delete_akum.html', {'deleted_akum': deleted_akum, 'form': form})
+
+
+# @login_required(login_url='login')
+# def delete_akum(request, object_id):
+#     deleted_akum = DvsInfoDbAkbCsv.objects.get(pk = object_id)
+#     test = DvsInfoDbCsv.objects.all
+#     for x in test:
+#         if  x.objekts == delete_akum.objekts:
+#             redirect_id = x.id_dvs
+#     if request.method=='POST':
+#         deleted_akum.delete()
+#         return redirect('single_object', object_id = redirect_id)
+#     return render(request, 'delete_akum.html', {'deleted_akum': deleted_akum})
 
 @login_required(login_url='login')
 def delete_rtu(request, object_id):
     deleted_rtu = DvsInfoDbRtuIekrtaCsv.objects.get(pk = object_id)
     form = RtuForm(request.POST or None, instance = deleted_rtu)
+    rtu_obj_id = RTU.objects.get(pk = object_id)
     if form.is_valid():
             form.save()
             deleted_rtu.delete()
             messages.success(request, ('RTU iekārtas dati ir izdzēsti'))
-            return redirect('home')
+            return redirect('single_object', object_id = rtu_obj_id.id_dvs)
     return render(request, 'delete_rtu.html', {'deleted_rtu': deleted_rtu, 'form': form})
 
 @login_required(login_url='login')
 def delete_raa(request, object_id):
     deleted_raa = DvsInfoDbRaaIekrtaCsv.objects.get(pk = object_id)
     form = RaaForm(request.POST or None, instance = deleted_raa)
+    raa_obj_id = RAA.objects.get(pk = object_id)
     if form.is_valid():
             form.save()
             deleted_raa.delete()
             messages.success(request, ('RAA iekārtas dati ir izdzēsti'))
-            return redirect('home')
+            return redirect('single_object', object_id = raa_obj_id.id_dvs)
     return render(request, 'delete_raa.html', {'deleted_raa': deleted_raa, 'form': form})
 
 @login_required(login_url='login')
@@ -238,7 +273,7 @@ def add_akb(request, object_id):
             #return redirect('add')
             return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'akb_ražotājs_un_nomināli':akb_ražotājs_un_nomināli , 'akb_skaits':akb_skaits , 'akb_izmērītais_ah':akb_izmērītais_ah , 'akb_iekšējā_pretestība_mom':akb_iekšējā_pretestība_mom , 'uzstādīšanas_vieta':uzstādīšanas_vieta , 'uzstādīšanas_gads':uzstādīšanas_gads , 'akb_izgatavošanas_partija_vai_datums':akb_izgatavošanas_partija_vai_datums , 'pārbaudes_datums':pārbaudes_datums , 'nākošā_pārbaude':nākošā_pārbaude , 'piezīme':piezīme, 'akb_object_data':akb_object_data })
         messages.success(request, ('Akumulators ir pievienots datubāzei'))
-        return redirect('home')
+        return redirect('single_object', object_id = akb_object_data.id_dvs)
     else:
         return render(request, 'add_akb.html', { 'akb_object_data':akb_object_data })
 
@@ -266,7 +301,7 @@ def add_rtu(request, object_id):
             #return redirect('add')
             return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'tips':tips , 'iekārtas_ražotājs':iekārtas_ražotājs , 'modelis':modelis , 'daudzums':daudzums , 'uzstadīšanas_vieta':uzstadīšanas_vieta , 'programmaturas_versija':programmaturas_versija, 'piezīme':piezīme, 'rtu_object_data':rtu_object_data })
         messages.success(request, ('RTU iekārta ir pievienota datubāzei'))
-        return redirect('home')
+        return redirect('single_object', object_id = rtu_object_data.id_dvs)
     else:
         return render(request, 'add_rtu.html', { 'rtu_object_data':rtu_object_data })
 
@@ -294,7 +329,7 @@ def add_raa(request, object_id):
             #return redirect('add')
             return render(request, 'add.html', {'reģions': reģions, 'nodaļa': nodaļa, 'iezīme': iezīme, 'objekts': objekts, 'raa_ražotājs':raa_ražotājs , 'raa_modelis':raa_modelis , 'raa_daudzums':raa_daudzums , 'raa_protokols':raa_protokols , 'raa_interface':raa_interface , 'raa_pieslegums':raa_pieslegums , 'piezīme':piezīme, 'raa_object_data':raa_object_data })
         messages.success(request, ('RAA iekārta ir pievienota datubāzei'))
-        return redirect('home')
+        return redirect('single_object', object_id = raa_object_data.id_dvs)
     else:
         return render(request, 'add_raa.html', { 'raa_object_data':raa_object_data })
 

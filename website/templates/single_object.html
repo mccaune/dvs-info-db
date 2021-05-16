@@ -18,6 +18,11 @@
                             <a href="{% url 'update_object' single_object.id_dvs %}" class="btn btn-outline-secondary btn-sm">Labot</a> 
                         {% endif %}
                     {% endfor %}
+                    {% for group in request.user.groups.all %}
+                        {% if group.name == 'users_can_delete_objects' %}
+                            <a href="{% url 'delete_object' single_object.id_dvs %}" class="btn btn-outline-danger btn-sm ml2">Dzēst</a> 
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             <div class="card-body">
