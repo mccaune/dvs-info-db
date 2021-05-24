@@ -2,9 +2,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if user.is_authenticated %}
+    <div class="container-xl">
+        {% if user.is_authenticated %}
+    <br/>
         <div class="card mt-4">
-            <div class="card-header">
+            <div class="card-header centerText">
                 <h3>Objektu sadalījums pa reģioniem</h3>
             </div>
             <div class="card-body">
@@ -49,10 +51,18 @@
         </center>
         <div class="card mb-4">
             <div class="card-body">
-                Šeit paredzēta vieta dropdown menu izvēlnei ar kuras palīdzību iegūt statistiku par katru reģionu atsevišķi
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <button type="button" class="btn btn-info">Kopā</button>
+                    <button type="button" class="btn btn-info">AR</button>
+                    <button type="button" class="btn btn-info">DR</button>
+                    <button type="button" class="btn btn-info">PR</button>
+                    <button type="button" class="btn btn-info">RP</button>
+                    <button type="button" class="btn btn-info">RR</button>
+                    <button type="button" class="btn btn-info">ZA</button>
+                    <button type="button" class="btn btn-info">ZR</button>
+                </div>
             </div>
         </div>
-        <br/>
         <div class="card mb-4">
             <div class="card-body">
                 <div class="container">
@@ -90,10 +100,18 @@
         </center>
         <div class="card mb-4">
             <div class="card-body">
-                Šeit paredzēta vieta dropdown menu izvēlnei ar kuras palīdzību iegūt statistiku par katru reģionu atsevišķi
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <button type="button" class="btn btn-info">Kopā</button>
+                    <button type="button" class="btn btn-info">AR</button>
+                    <button type="button" class="btn btn-info">DR</button>
+                    <button type="button" class="btn btn-info">PR</button>
+                    <button type="button" class="btn btn-info">RP</button>
+                    <button type="button" class="btn btn-info">RR</button>
+                    <button type="button" class="btn btn-info">ZA</button>
+                    <button type="button" class="btn btn-info">ZR</button>
+                </div>
             </div>
         </div>
-        <br/>
         <div class="card mb-4">
             <div class="card-body">
                 <div class="container">
@@ -243,6 +261,8 @@
             Please login to access data  <a href="{% url 'login' %}">Login</a> 
         </div>
     {% endif %}  
+    </div>
+    
     
 {% endblock %}
 

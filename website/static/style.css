@@ -55,3 +55,19 @@ footer{
     /* background-image: url("background.jpg"); */
     background: linear-gradient(89deg, #fdfbfb 0%, #ebedee 100%);
 }
+
+#navbarTop{
+    position: fixed !important;
+    top: 0 !important;
+    width: 100%;
+}
+
+#test1{
+    width: 400px;
+}
+
+#test2{
+    display: block;
+    width: 100%;
+}
+

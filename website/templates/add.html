@@ -1,134 +1,136 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <br/>
-    <center>
-        <h1 class="pb-2 pt-2">Pievienot jaunu objektu</h1>
-    </center>
-    <br/>
-    {% for group in request.user.groups.all %}
-        {% if group.name == 'users_can_edit_DB' %}
-        <form method="POST" action="{% url 'add' %}">
-            {% csrf_token %}
-                <!-- <div class="form-group mb-3">
-                    <label>Reģions</label>
-                    <select class="form-control" name="reģions" value="{{reģions}}">
-                    <option>AR</option>
-                    <option>DR</option>
-                    <option>PR</option>
-                    <option>RP</option>
-                    <option>RR</option>
-                    <option>ZA</option>
-                    <option>ZR</option>
-                    </select>
-                </div> -->
-                <div class="card text-center">
-                    <div class="card-header">
-                        <h3>Objekta informācija</h3>
+    <div class="container-xl">
+        <center>
+            <h1 class="pb-2 pt-2">Pievienot jaunu objektu</h1>
+        </center>
+        <br/>
+        {% for group in request.user.groups.all %}
+            {% if group.name == 'users_can_edit_DB' %}
+            <form method="POST" action="{% url 'add' %}">
+                {% csrf_token %}
+                    <!-- <div class="form-group mb-3">
+                        <label>Reģions</label>
+                        <select class="form-control" name="reģions" value="{{reģions}}">
+                        <option>AR</option>
+                        <option>DR</option>
+                        <option>PR</option>
+                        <option>RP</option>
+                        <option>RR</option>
+                        <option>ZA</option>
+                        <option>ZR</option>
+                        </select>
+                    </div> -->
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h3>Objekta informācija</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Reģions" name="reģions" value="{{reģions}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Nodaļa" name="nodaļa" value="{{nodaļa}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Iezīme" name="iezīme" value="{{iezīme}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Objekts" name="objekts" value="{{objekts}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Objekta nosaukums" name="objekta_nosaukums" value="{{objekta_nosaukums}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Adrese" name="adrese" value="{{adrese}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Atbidības teritorija" name="atbidības_teritorija" value="{{atbidības_teritorija}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Tehniskais id" name="tehn_id" value="{{tehn_id}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="GPS N" name="gps_n" value="{{gps_n}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="GPS E" name="gps_e" value="{{gps_e}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="ĢIS X" name="ģis_x" value="{{ģis_x}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="ĢIS Y" name="ģis_y" value="{{ģis_y}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Pieslēguma veids" name="pieslēguma_veids" value="{{pieslēguma_veids}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Darbs ar 2 centriem" name="darbs_ar_2_centriem" value="{{darbs_ar_2_centriem}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Garantētā barošana" name="garantētā_barošana" value="{{garantētā_barošana}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="RTU ražotājs" name="rtu_ražotājs" value="{{rtu_ražotājs}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="RTU ražotājs 2" name="rtu_2_ražotājs" value="{{rtu_2_ražotājs}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Statuss" name="status" value="{{status}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="RTU ip adrese" name="rtu_ip_adrese" value="{{rtu_ip_adrese}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="NFE tabula " name="nfe_tabula " value="{{nfe_tabula }}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Protokols ar scada" name="protokols_ar_scada" value="{{protokols_ar_scada}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Protokols ar ast" name="protokols_ar_ast" value="{{protokols_ar_ast}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Saite ar slēgiekārtu" name="dpp_1_saite_ar_slēgiekārtu" value="{{dpp_1_saite_ar_slēgiekārtu}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Saite ar slēgiekārtu 2" name="dpp_2_saite_ar_slēgiekārtu" value="{{dpp_2_saite_ar_slēgiekārtu}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="JS skaits" name="js" value="{{js}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="IO skaits" name="io" value="{{io}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="TS skaits" name="ts" value="{{ts}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="TV skaits" name="tv" value="{{tv}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="TM skaits" name="tm" value="{{tm}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Rekonstrukcijas gads" name="rekonstrukcijas_gads" value="{{rekonstrukcijas_gads}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Vecākās komponentes gads" name="vec_komp_gads" value="{{vec_komp_gads}}">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Piezīme" name="piezīme" value="{{piezīme}}">
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <button type="submit" class="btn btn-success btn-lg">Pievienot objektu</button>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Reģions" name="reģions" value="{{reģions}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Nodaļa" name="nodaļa" value="{{nodaļa}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Iezīme" name="iezīme" value="{{iezīme}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Objekts" name="objekts" value="{{objekts}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Objekta nosaukums" name="objekta_nosaukums" value="{{objekta_nosaukums}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Adrese" name="adrese" value="{{adrese}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Atbidības teritorija" name="atbidības_teritorija" value="{{atbidības_teritorija}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Tehniskais id" name="tehn_id" value="{{tehn_id}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="GPS N" name="gps_n" value="{{gps_n}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="GPS E" name="gps_e" value="{{gps_e}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="ĢIS X" name="ģis_x" value="{{ģis_x}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="ĢIS Y" name="ģis_y" value="{{ģis_y}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Pieslēguma veids" name="pieslēguma_veids" value="{{pieslēguma_veids}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Darbs ar 2 centriem" name="darbs_ar_2_centriem" value="{{darbs_ar_2_centriem}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Garantētā barošana" name="garantētā_barošana" value="{{garantētā_barošana}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="RTU ražotājs" name="rtu_ražotājs" value="{{rtu_ražotājs}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="RTU ražotājs 2" name="rtu_2_ražotājs" value="{{rtu_2_ražotājs}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Statuss" name="status" value="{{status}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="RTU ip adrese" name="rtu_ip_adrese" value="{{rtu_ip_adrese}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="NFE tabula " name="nfe_tabula " value="{{nfe_tabula }}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Protokols ar scada" name="protokols_ar_scada" value="{{protokols_ar_scada}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Protokols ar ast" name="protokols_ar_ast" value="{{protokols_ar_ast}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Saite ar slēgiekārtu" name="dpp_1_saite_ar_slēgiekārtu" value="{{dpp_1_saite_ar_slēgiekārtu}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Saite ar slēgiekārtu 2" name="dpp_2_saite_ar_slēgiekārtu" value="{{dpp_2_saite_ar_slēgiekārtu}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="JS skaits" name="js" value="{{js}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="IO skaits" name="io" value="{{io}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="TS skaits" name="ts" value="{{ts}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="TV skaits" name="tv" value="{{tv}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="TM skaits" name="tm" value="{{tm}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Rekonstrukcijas gads" name="rekonstrukcijas_gads" value="{{rekonstrukcijas_gads}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Vecākās komponentes gads" name="vec_komp_gads" value="{{vec_komp_gads}}">
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Piezīme" name="piezīme" value="{{piezīme}}">
-                        </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <button type="submit" class="btn btn-success btn-lg">Pievienot objektu</button>
-                    </div>
-                </div>
-            </form>
-        {% endif %}
-    {% endfor %}
+                </form>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
 {% endblock %}

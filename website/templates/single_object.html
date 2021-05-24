@@ -2,13 +2,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     {% if user.is_authenticated %}
+    <div class="container-xl">
         <center>
             <h1 class="mt-2 mb-2"><strong>{{ single_object.objekts }}  {{ single_object.objekta_nosaukums }}</strong></h1>
         </center>
-
-        
-        
         <div class="card">
             <div class="card-header">
                 <div class="row row-cols-lg-auto align-items-center">
@@ -346,6 +345,7 @@
         <div class="card-body">
             Please login to access data  <a href="{% url 'login' %}">Login</a> 
         </div>
-    {% endif %}   
+    {% endif %}
+    </div>
 
 {% endblock %}
