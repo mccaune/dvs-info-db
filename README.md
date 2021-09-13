@@ -1,9 +1,10 @@
 # dvs-info-db
 
 > DVS info databse
+
 > The database displays data on automated remote control objects and installed equipment
 
-
+live version: [http://ec2-3-142-87-206.us-east-2.compute.amazonaws.com/](http://ec2-3-142-87-206.us-east-2.compute.amazonaws.com/) 
 AWS online page login for testing purposes (with full editing permissions)
 
 Username: mc_alfa
